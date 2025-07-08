@@ -1,0 +1,31 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_17_5_fu_dur_0.dzn benchmarks/Mutants/mut-CSWAP-1.mzn
+Warning: model inconsistency detected
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-CSWAP-1.mzn:77.5-96.5
+  in call 'forall'
+  in array comprehension expression
+    with r = 1
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-CSWAP-1.mzn:79.9-95.9
+  in let expression
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-CSWAP-1.mzn:85.13-94.17
+  in if-then-else expression
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-CSWAP-1.mzn:86.17-91.17
+  in call 'cumulative'
+/opt/minizinc/MiniZincIDE-2.7.0-bundle-linux-x86_64/share/minizinc/std/cumulative.mzn:21.3-49.7
+  in binary '/\' operator expression
+/opt/minizinc/MiniZincIDE-2.7.0-bundle-linux-x86_64/share/minizinc/std/cumulative.mzn:25.3-49.7
+  in if-then-else expression
+/opt/minizinc/MiniZincIDE-2.7.0-bundle-linux-x86_64/share/minizinc/std/cumulative.mzn:26.5-48.9
+  in binary '/\' operator expression
+/opt/minizinc/MiniZincIDE-2.7.0-bundle-linux-x86_64/share/minizinc/std/cumulative.mzn:30.5-48.9
+  in if-then-else expression
+/opt/minizinc/MiniZincIDE-2.7.0-bundle-linux-x86_64/share/minizinc/std/cumulative.mzn:38.7-45.11
+  in binary '/\' operator expression
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+  in binary '\/' operator expression
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.11383534129709005 ms
+OK

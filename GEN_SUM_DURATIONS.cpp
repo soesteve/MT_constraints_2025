@@ -1,0 +1,150 @@
+// Este programa calcula la suma de las duraciones
+// para luego aplicar MR1
+
+
+#include <iostream>
+#include <fstream>
+#include <iterator>
+#include <string>
+#include <regex>
+#include <filesystem>
+using namespace std;
+
+const string path = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";
+
+void processes(string path_file, string name_file, ofstream& file_sum);
+
+int main()
+{
+	ofstream file_sum(path + "sum_durations.txt");
+
+	string path_file = path + "benchmarks\\data\\data_psplib\\j30\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + ".dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR1\\j30\\";
+
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_all_prec.dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR2\\j30\\";
+
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_cycle.dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR3\\j30\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_d.dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR4\\j30\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+	   for (int j = 1; j <= 10; j++) {  // 10
+		  for (int k = 1; k <= 1; k++) {  // 4
+			 string name_file =  "J30_" + to_string(i) + "_" + to_string(j) + "_fu_rc_" + to_string(k) + ".dzn";
+			 processes(path_file, name_file, file_sum);
+		  }
+	   }
+	}
+
+	/*
+	path_file = "benchmarks\\data\\data_psplib_follow_ups\\MR5\\j30\\";
+
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+				string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_1_rc_0.dzn";
+				processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = "benchmarks\\data\\data_psplib_follow_ups\\MR6\\j30\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+				string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_rc_and_rr_0.dzn";
+				processes(path_file, name_file, file_sum);
+		}
+	}
+
+	path_file = "benchmarks\\data\\data_psplib_follow_ups\\MR7\\j30\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_rr_max.dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+	*/
+	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\DUR_0\\";
+	for (int i = 1; i <= 48; i++) {  // 48
+		for (int j = 1; j <= 10; j++) {  // 10
+			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_dur_0.dzn";
+			processes(path_file, name_file, file_sum);
+		}
+	}
+
+	file_sum.close();
+	system("pause");
+	return 0;
+}
+
+
+
+void processes(string path_file, string name_file, ofstream& file_sum) {
+
+	ifstream file_in(path_file + name_file);
+
+	if (!file_in) {
+		cout << path_file + name_file << " no se encuentra" << endl;
+		return;
+	}
+
+	std::string s = "";
+	getline(file_in, s);   // n_res
+	getline(file_in, s);   // rc
+	getline(file_in, s);   // n_tasks
+
+	// Trabajo con expresiones regulares para quitar = ; [ ]
+	std::regex word_regex("(\\w+)");
+
+	// Uso iteradores
+	std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
+	++i;
+	std::smatch match = *i;
+	std::string match_str = match.str();
+	int num_tasks = stoi(match_str);  // casting de string a int
+
+	getline(file_in, s);   // d
+
+	i = std::sregex_iterator(s.begin(), s.end(), word_regex);
+
+	// Las líneas se leen y escriben directamente pq no cambian
+	// hasta encontrar una línea que comienza con suc
+
+	// Sumo las duraciones
+	int suma = 0;
+	for (int k = 0; k < num_tasks; k++) {
+		++i;
+		match = *i;
+		match_str = match.str();
+		suma = suma + stoi(match_str);
+	}
+
+
+	file_sum << name_file << " " << suma << endl;
+
+	file_in.close();
+}
