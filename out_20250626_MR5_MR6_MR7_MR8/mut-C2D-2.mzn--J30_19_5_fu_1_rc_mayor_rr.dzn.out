@@ -1,0 +1,10 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR5/j30/J30_19_5_fu_1_rc_mayor_rr.dzn benchmarks/Mutants/mut-C2D-2.mzn
+Warning: file "mut-C2D-2.mzn" included from library, but also exists in current working directory.
+
+Start times = [0, 0, 0, 4, 12, 10, 12, 5, 10, 13, 13, 20, 20, 16, 27, 13, 23, 13, 25, 25, 20, 26, 19, 29, 31, 34, 33, 34, 39, 34]
+makespan = 48
+----------
+==========
+OK
+total time: 0.21415789518505335 ms
+OK

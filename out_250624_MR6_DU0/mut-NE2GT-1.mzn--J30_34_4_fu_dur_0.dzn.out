@@ -1,0 +1,10 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_34_4_fu_dur_0.dzn benchmarks/Mutants/mut-NE2GT-1.mzn
+Warning: file "mut-NE2GT-1.mzn" included from library, but also exists in current working directory.
+
+Start times = [0, 3, 0, 3, 3, 12, 3, 11, 14, 12, 13, 22, 22, 32, 31, 31, 42, 22, 35, 45, 53, 49, 62, 62, 45, 47, 53, 54, 63, 63]
+makespan = 67
+----------
+==========
+OK
+total time: 0.2142535480670631 ms
+OK

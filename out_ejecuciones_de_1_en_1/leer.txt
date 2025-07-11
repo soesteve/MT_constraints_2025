@@ -1,0 +1,58 @@
+Hay ejecuciones que las relanzo para ver el resultado
+
+1. rcpsp.mzn--J30_27_6_fu_rc_and_rr_0.dzn
+
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_27_6_fu_rc_and_rr_0.dzn benchmarks/models/rcpsp.mzn
+
+PASA A
+
+minizinc benchmarks/models/rcpsp.mzn benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_27_6_fu_rc_and_rr_0.dzn
+Start times = [0, 0, 0, 3, 3, 5, 9, 15, 18, 18, 9, 16, 16, 15, 25, 15, 25, 26, 22, 26, 29, 32, 34, 30, 30, 44, 40, 37, 40, 49]
+makespan = 59
+----------
+==========
+
+2. mut-EQ2LE-1.mzn--J30_47_10_fu_rc_and_rr_0.dzn.out
+
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_47_10_fu_rc_and_rr_0.dzn benchmarks/Mutants/mut-EQ2LE-1.mzn
+
+PASA A
+
+minizinc benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_47_10_fu_rc_and_rr_0.dzn benchmarks/Mutants/mut-EQ2LE-1.mzn
+Start times = [0, 0, 0, 4, 5, 4, 12, 4, 16, 12, 12, 15, 26, 16, 6, 16, 26, 26, 16, 32, 41, 22, 32, 46, 22, 32, 41, 41, 52, 47]
+makespan = 57
+----------
+==========
+
+
+3.  rcpsp.mzn--J30_30_9_fu_rc_1.dzn.out
+
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M4/j30/J30_30_9_fu_rc_1.dzn benchmarks/models/rcpsp.mzn
+TIMEOUT
+total time: 30.002820286434144 ms
+OK
+
+PASA A
+
+minizinc benchmarks/data/data_psplib_follow_ups/MR4/j30/J30_30_9_fu_rc_1.dzn benchmarks/models/rcpsp.mzn 
+Start times = [0, 0, 0, 2, 8, 2, 10, 2, 22, 9, 13, 3, 14, 34, 39, 8, 24, 10, 17, 28, 17, 25, 13, 25, 33, 22, 28, 36, 37, 40]
+makespan = 45
+----------
+==========
+
+4. rcpsp.mzn--J30_11_8_fu_dur_0.dzn.out
+
+
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_11_8_fu_dur_0.dzn benchmarks/models/rcpsp.mzn
+TIMEOUT
+total time: 30.00049506314099 ms
+OK
+
+PASA A 
+minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_11_8_fu_dur_0.dzn benchmarks/models/rcpsp.mzn
+
+Start times = [0, 0, 0, 0, 0, 9, 18, 9, 21, 11, 11, 18, 21, 27, 18, 33, 11, 8, 5, 28, 34, 28, 22, 36, 28, 46, 36, 44, 49, 44]
+makespan = 55
+----------
+==========
+

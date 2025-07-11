@@ -105,7 +105,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMutants_killed_matrix& 
 
 	// Guardo el fichero "sum_durations.txt" en un diccionario
 
-	ifstream file_in("C:\\Users\\Sonia\\Desktop\\MT_2025\\sum_durations.txt");
+	ifstream file_in("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\sum_durations.txt");
 	if (!file_in) {
 		cout << " Fichero sum_durations.txt no encontrado. \n";
 	}
@@ -114,7 +114,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMutants_killed_matrix& 
 	file_in.close();
 
 
-	ifstream file_mayor("C:\\Users\\Sonia\\Desktop\\MT_2025\\mayor_duration.txt");
+	ifstream file_mayor("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\mayor_duration.txt");
 	if (!file_mayor) {
 		cout << " Fichero mayor_duration.txt no encontrado. \n";
 	}
@@ -123,7 +123,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMutants_killed_matrix& 
 	file_mayor.close();
 
 
-	ifstream file_results("C:\\Users\\Sonia\\Desktop\\MT_2025\\resultados_proceso_2025_out_T300_230818.txt");
+	ifstream file_results("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\resultados_proceso_2025_out_T300_230818.txt");
 	if (!file_results) {
 		cout << "Fichero resultados_proceso_2025_out_T300_230818.txt no encontrado.  \n";
 	}
@@ -131,7 +131,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMutants_killed_matrix& 
 	results_dicc(file_results, dicc_results);
 	file_results.close();
 
-	ofstream mutants_killed("C:\\Users\\Sonia\\Desktop\\MT_2025\\V8_mutants_killed_2025.csv");
+	ofstream mutants_killed("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\V8_mutants_killed_2025.csv");
 	mutants_killed << "Mutant;O1!=O1_mut;MR1;MR2;MR3;MR4;Existe diferencia;Killed\n";
 
 	ofstream mutants_killed_2("V8_killed_different_outputs.csv");
@@ -141,7 +141,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMutants_killed_matrix& 
 	ofstream mutants_killed_MR4("V8_killed_MR4.csv");
 
 	string s = "";
-	ofstream log("C:\\Users\\Sonia\\Desktop\\MT_2025\\V8_process_MRs_log_2025.txt");
+	ofstream log("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\V8_process_MRs_log_2025.txt");
 
 	int cont_log = 0;
 	int cont_killed, cont_killed_2 = 0, cont_killed_MR1 = 0, cont_killed_MR2 = 0, cont_killed_MR3 = 0, cont_killed_MR4 = 0;
@@ -634,7 +634,7 @@ void mutants_paths(tPaths& array_mzns, tMutants_killed_matrix& matrix, tMutants_
 	tMutants_killed_matrix_2& matrix_MR1, tMutants_killed_matrix_2& matrix_MR2, tMutants_killed_matrix_2& matrix_MR3, 
 	tMutants_killed_matrix_2& matrix_MR4) {
 
-	ifstream file_in("C:\\Users\\Sonia\\Desktop\\MT_2025\\mutants.txt");
+	ifstream file_in("C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\mutants.txt");
 	string aux = "";
 
 	file_in >> aux;

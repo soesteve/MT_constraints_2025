@@ -1,0 +1,10 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_36_4_fu_dur_0.dzn benchmarks/Mutants/mut-EQ2LE-1.mzn
+Warning: file "mut-EQ2LE-1.mzn" included from library, but also exists in current working directory.
+
+Start times = [0, 0, 0, 6, 6, 6, 15, 0, 15, 0, 23, 12, 23, 30, 15, 23, 19, 39, 39, 39, 46, 30, 30, 36, 43, 43, 48, 55, 38, 51]
+makespan = 59
+----------
+==========
+OK
+total time: 0.22067854134365916 ms
+OK

@@ -1,0 +1,310 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_42_1_fu_dur_0.dzn benchmarks/Mutants/mut-A2DV-2.mzn
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: undefined result becomes false in Boolean context
+  (division by zero)
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = <expression>
+    with j = <expression>
+/home/soesteve/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/mut-A2DV-2.mzn:67.9-71.13
+  in if-then-else expression
+  in call 'exists'
+  in array comprehension expression
+    with r = <expression>
+  in binary '>' operator expression
+  in binary 'div' operator expression
+
+Warning: Further warnings have been suppressed.
+
+Start times = [0, 0, 5, 0, 8, 0, 0, 1, 11, 24, 9, 1, 17, 26, 26, 19, 9, 28, 31, 18, 28, 35, 29, 39, 35, 30, 36, 45, 30, 41]
+makespan = 49
+----------
+==========
+OK
+total time: 0.36478066304698586 ms
+OK
