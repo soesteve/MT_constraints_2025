@@ -8,8 +8,8 @@
 using namespace std;
 
 const string path = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";
-//const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas envío la salida a otra carpeta
-const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas envío la salida a otra carpeta
+const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas envío la salida a otra carpeta
+//const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas envío la salida a otra carpeta
 
 struct tPaths {
 	string file[100];
@@ -633,8 +633,6 @@ bool process_MR5(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 		return false;
 	}
 	
-	// Al existir tareas de duración > 0, entonces o2 debe ser > 0  
-	// Además, o1 y o2 pertenecen a R+ = { x in R | x > 0 }
 	if (O2_mut == 0) {
 		return true;
 	}
