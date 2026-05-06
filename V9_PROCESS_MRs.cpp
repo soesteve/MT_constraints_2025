@@ -1,4 +1,4 @@
-#include <iostream>
+Ôªø#include <iostream>
 #include <fstream>
 #include <iterator>
 #include <string>
@@ -8,8 +8,8 @@
 using namespace std;
 
 const string path = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";
-//const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas envÌo la salida a otra carpeta
-const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas envÌo la salida a otra carpeta
+const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas env√≠o la salida a otra carpeta
+//const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas env√≠o la salida a otra carpeta
 
 struct tPaths {
 	string file[100];
@@ -90,8 +90,8 @@ bool process_MR8(ofstream& log, int O1, int O2, int O1_mut, int O2_mut);
 
 int main() {
 
-	// En el array de mzns, el primero es el código rcpsp.mzn original
-	// y después todos los mzn mutantes
+	// En el array de mzns, el primero es el c‚Äîdigo rcpsp.mzn original
+	// y despu≈Ωs todos los mzn mutantes
 	tPaths array_mzns;
 	tMatrix matrix;
 	tMatrix_2 matrix_diff, matrix_MR1, matrix_MR2, matrix_MR3, matrix_MR4, matrix_MR5, matrix_MR6, matrix_MR7, matrix_MR8;
@@ -143,7 +143,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 
 	// Guardo el fichero de los procesos en el diccionario dicc_results.
-// Puede haber m·s de un fichero
+// Puede haber m√°s de un fichero
 	unordered_map<string, int> dicc_results;
 
 
@@ -633,8 +633,8 @@ bool process_MR5(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 		return false;
 	}
 	
-	// Al existir tareas de duraciÛn > 0, entonces o2 debe ser > 0  
-	// Adem·s, o1 y o2 pertenecen a R+ = { x in R | x > 0 }
+	// Al existir tareas de duraci√≥n > 0, entonces o2 debe ser > 0  
+	// Adem√°s, o1 y o2 pertenecen a R+ = { x in R | x > 0 }
 	if (O2_mut == 0) {
 		return true;
 	}
