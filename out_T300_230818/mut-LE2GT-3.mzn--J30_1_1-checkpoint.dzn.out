@@ -1,4 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j30/.ipynb_checkpoints/J30_1_1-checkpoint.dzn benchmarks/Mutants/mut-LE2GT-3.mzn
-TIMEOUT
-total time: 300.0022795489058 ms
-OK

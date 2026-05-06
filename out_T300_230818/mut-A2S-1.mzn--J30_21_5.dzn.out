@@ -1,4 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j30/J30_21_5.dzn benchmarks/Mutants/mut-A2S-1.mzn
-TIMEOUT
-total time: 300.00341401295736 ms
-OK

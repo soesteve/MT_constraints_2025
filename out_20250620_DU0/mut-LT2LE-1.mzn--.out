@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/ benchmarks/Mutants/mut-LT2LE-1.mzn
-minizinc: Unrecognized option or bad format `benchmarks/data/data_psplib_follow_ups/DUR_0/'
-minizinc: MiniZinc driver.
-Usage: minizinc  [<options>] [-I <include path>] <model>.mzn [<data>.dzn ...] or just <flat>.fzn
-More info with "/opt/minizinc/current/bin/minizinc --help"
-OK
-total time: 0.0076031130738556385 ms
-OK

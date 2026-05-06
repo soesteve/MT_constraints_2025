@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_21_7_fu_rc_and_rr_0.dzn benchmarks/models/rcpsp.mzn
-Start times = [0, 0, 0, 9, 10, 9, 5, 5, 5, 19, 10, 18, 11, 24, 19, 25, 20, 25, 25, 9, 28, 28, 37, 18, 37, 28, 30, 30, 39, 43]
-makespan = 53
-----------
-==========
-OK
-total time: 0.21434801258146763 ms
-OK

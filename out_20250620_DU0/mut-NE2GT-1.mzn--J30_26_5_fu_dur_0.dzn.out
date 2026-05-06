@@ -1,6 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_26_5_fu_dur_0.dzn benchmarks/Mutants/mut-NE2GT-1.mzn
-Warning: file "mut-NE2GT-1.mzn" included from library, but also exists in current working directory.
-
-TIMEOUT
-total time: 30.000516758300364 ms
-OK

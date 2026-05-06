@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/DUR_0/J30_48_9_fu_dur_0.dzn benchmarks/Mutants/mut-CSWAP-1.mzn
-Start times = [0, 0, 0, 8, 6, 0, 13, 10, 0, 10, 18, 22, 27, 28, 19, 19, 37, 14, 33, 28, 37, 37, 40, 40, 46, 20, 29, 49, 49, 49]
-makespan = 59
-----------
-==========
-OK
-total time: 0.16394614428281784 ms
-OK

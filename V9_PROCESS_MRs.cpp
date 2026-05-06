@@ -7,9 +7,11 @@
 #include <vector>
 using namespace std;
 
-const string path = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";
-const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas envío la salida a otra carpeta
-//const string path_salida = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas envío la salida a otra carpeta
+// const string path = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";
+const string path = "C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\MT_constraints_2025\\";
+//const string path_out = "C:\\Users\\Sonia\\Desktop\\MT_2025\\";  // Para hacer pruebas envío la salida a otra carpeta
+//const string path_out = "C:\\Users\\Sonia\\Desktop\\MT_2025\\pruebas\\";  // Para hacer pruebas envío la salida a otra carpeta
+const string path_out = "C:\\Users\\Sonia\\Desktop\\MT_2026\\results\\";  
 
 struct tPaths {
 	string file[100];
@@ -33,7 +35,7 @@ struct tMatrix_2 {
 };
 
 
-// PROTOTIPOS
+// PROTOTYPES
 
 
 void mutants_paths(tPaths& array_mzns, tMatrix& matrix, tMatrix_2& matrix_diff,
@@ -90,8 +92,7 @@ bool process_MR8(ofstream& log, int O1, int O2, int O1_mut, int O2_mut);
 
 int main() {
 
-	// En el array de mzns, el primero es el c—digo rcpsp.mzn original
-	// y despuŽs todos los mzn mutantes
+	// In the array of mzns, the first is the original rcpsp.mzn code and then all the mutant (mzns).
 	tPaths array_mzns;
 	tMatrix matrix;
 	tMatrix_2 matrix_diff, matrix_MR1, matrix_MR2, matrix_MR3, matrix_MR4, matrix_MR5, matrix_MR6, matrix_MR7, matrix_MR8;
@@ -101,28 +102,27 @@ int main() {
 		matrix_MR5, matrix_MR6, matrix_MR7, matrix_MR8);
 
 
-	// En el array de dzns, el primero es el original dzn
-	// y despues todos los dzn generados como folow-up
+	// In the dzns array, the first is the original dzn and then all the dzns generated as follow-up
 
 	tPaths array_dzn;
 
-	array_dzn.file[0] = ".dzn";   // ojo el primero es el original
+	array_dzn.file[0] = ".dzn";   // Note: the first one is the original
 	array_dzn.cont++;
-	array_dzn.file[1] = "_fu_all_prec.dzn";
+	array_dzn.file[1] = "_fu_all_prec.dzn"; // MR1
 	array_dzn.cont++;
-	array_dzn.file[2] = "_fu_cycle.dzn";
+	array_dzn.file[2] = "_fu_cycle.dzn"; // MR2
 	array_dzn.cont++;
-	array_dzn.file[3] = "_fu_d.dzn";
+	array_dzn.file[3] = "_fu_d.dzn"; // MR3
 	array_dzn.cont++;
-	array_dzn.file[4] = "_fu_rc_1.dzn";
+	array_dzn.file[4] = "_fu_rc_1.dzn"; // MR4
 	array_dzn.cont++;
 	array_dzn.file[5] = "_fu_rc_mayor_rr.dzn";   // MR5
 	array_dzn.cont++;
-	array_dzn.file[6] = "_fu_rc_and_rr_0.dzn";
+	array_dzn.file[6] = "_fu_rc_and_rr_0.dzn";  // MR6
 	array_dzn.cont++;
-	array_dzn.file[7] = "_fu_rr_max.dzn";
+	array_dzn.file[7] = "_fu_rr_max.dzn";  // MR7
 	array_dzn.cont++;
-	array_dzn.file[8] = "_fu_dur_0.dzn";
+	array_dzn.file[8] = "_fu_dur_0.dzn";  // MR8
 	array_dzn.cont++;
 
 	process_all(array_mzns, array_dzn, matrix, matrix_diff, matrix_MR1, matrix_MR2, matrix_MR3, matrix_MR4, matrix_MR5, matrix_MR6, matrix_MR7, matrix_MR8);
@@ -142,15 +142,14 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 	tMatrix_2& matrix_MR8) {
 
 
-	// Guardo el fichero de los procesos en el diccionario dicc_results.
-// Puede haber más de un fichero
+	// I store the process files in the dicc_results dictionary, can be more than one file.
 	unordered_map<string, int> dicc_results;
 
 
 	std::vector<std::string> file_names;
-	file_names.push_back("resultados_proceso_2025_out_T30_230723.txt");
-	file_names.push_back("resultados_proceso_2025_out_20250626_MR5_MR6_MR7_MR8.txt");
-	file_names.push_back("resultados_proceso_2025_out_20250710_MR5.txt");
+	file_names.push_back("out_1.txt");
+	file_names.push_back("out_2.txt");
+	file_names.push_back("out_3.txt");
 
 	ifstream file_results;
 	for (int i = 0; i < file_names.size(); i++) {
@@ -167,21 +166,21 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 
 
-	// Guardo el fichero "sum_durations.txt" en el diccionario dicc_durations
+	// I save the file "sum_durations.txt" in the dictionary dicc_durations
 
 	ifstream file_in(path + "sum_durations.txt");
 	if (!file_in) {
-		cout << " Fichero sum_durations.txt no encontrado. \n";
+		cout << " File sum_durations.txt not found. \n";
 	}
 	unordered_map<string, int> dicc_durations;
 	sum_durations_dicc(file_in, dicc_durations);
 	file_in.close();
 
-	// Guardo el fichero "mayor_duration.txt" en el diccionario dicc_mayor_duration
+	// I save the file "mayor_duration.txt" in the dictionary dicc_mayor_duration
 
-	ifstream file_mayor(path + "mayor_duration.txt");
+	ifstream file_mayor(path + "longer_durations.txt");
 	if (!file_mayor) {
-		cout << " Fichero mayor_duration.txt no encontrado. \n";
+		cout << " File longer_durations.txt not found. \n";
 	}
 	unordered_map<string, int> dicc_mayor_duration;
 	mayor_durations_dicc(file_mayor, dicc_mayor_duration);
@@ -190,22 +189,22 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 
 
-	ofstream mutants_killed(path_salida + "V9_mutants_killed_2025.csv");
+	ofstream mutants_killed(path_out + "V9_mutants_killed.csv");
 
 	mutants_killed << "Mutant;O1!=O1_mut;MR1;MR2;MR3;MR4;MR5;MR6;MR7;MR8;Killed\n";
 
-	ofstream mutants_killed_2(path_salida + "V9_killed_different_outputs.csv");  // Matriz detallada de la columna O1!=O1_mut
-	ofstream mutants_killed_MR1(path_salida + "V9_killed_MR1.csv");
-	ofstream mutants_killed_MR2(path_salida + "V9_killed_MR2.csv");
-	ofstream mutants_killed_MR3(path_salida + "V9_killed_MR3.csv");
-	ofstream mutants_killed_MR4(path_salida + "V9_killed_MR4.csv");
-	ofstream mutants_killed_MR5(path_salida + "V9_killed_MR5.csv");
-	ofstream mutants_killed_MR6(path_salida + "V9_killed_MR6.csv");
-	ofstream mutants_killed_MR7(path_salida + "V9_killed_MR7.csv");
-	ofstream mutants_killed_MR8(path_salida + "V9_killed_MR8.csv");
+	ofstream mutants_killed_2(path_out + "V9_killed_different_outputs.csv");  // Matriz detallada de la columna O1!=O1_mut
+	ofstream mutants_killed_MR1(path_out + "V9_killed_MR1.csv");
+	ofstream mutants_killed_MR2(path_out + "V9_killed_MR2.csv");
+	ofstream mutants_killed_MR3(path_out + "V9_killed_MR3.csv");
+	ofstream mutants_killed_MR4(path_out + "V9_killed_MR4.csv");
+	ofstream mutants_killed_MR5(path_out + "V9_killed_MR5.csv");
+	ofstream mutants_killed_MR6(path_out + "V9_killed_MR6.csv");
+	ofstream mutants_killed_MR7(path_out + "V9_killed_MR7.csv");
+	ofstream mutants_killed_MR8(path_out + "V9_killed_MR8.csv");
 
 	string s = "";
-	ofstream log(path_salida + "V9_process_MRs_log_2025.txt");
+	ofstream log(path_out + "V9_process_MRs_log_2025.txt");
 
 	int cont_log = 0;
 	int cont_killed, cont_killed_2 = 0, cont_killed_MR1 = 0, cont_killed_MR2 = 0, cont_killed_MR3 = 0,
@@ -243,9 +242,9 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 					log << cont_log << " \n";
 
 					int O1 = -3, O2 = -3, O1_mut = -3, O2_mut = -3;
-					// -2 es TIMEOUT
-					// -1 es UNSATISFIABLE
-					// un valor >= 0 corresponde al makespan
+					// -2 is TIMEOUT
+					// -1 is UNSATISFIABLE
+					// a value >= 0 corresponds to the makespan
 
 					if (check_files_and_find_Os(dicc_results,
 						original_mzn_original_dnz, O1, original_mzn_fu_dzn, O2,
@@ -264,26 +263,26 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 
 						if (O1 == O1_mut && O2 == O2_mut) {
-							// log << "Los resultados de los originales (O1 y O1_mut) y mutantes son iguales (O2 y O2_mut).";
+							// log << "The results of the originals (O1 and O1_mut) and mutants are equal (O2 and O2_mut).";
 
 						}
 						else {
 
-							// Se marcan como distintos. columna "Existe diferencia"
+							// Mark as different. column "Exists difference"
 							// matrix.value[k][9] = 1;
-							// log << " No equivalente: " << matrix.name[k] << endl;
+							// log << " Not equivalent: " << matrix.name[k] << endl;
 
-							// Si el original y el mutante tienen resultados distintos, se mata al mutante
-							// Incluyendo insat (-1) y timeout (-2)
+							// If the original and the mutant have different results, the mutant is killed
+							// Including insat (-1) and timeout (-2)
 							if (O1 != O1_mut) {
-								log << "O1 != O1_mut mata a " << matrix.name[k] << "\n";
+								log << "O1 != O1_mut kills " << matrix.name[k] << "\n";
 								matrix.value[k][0] = 1;
 								matrix_diff.value[k][ncol_value] = 1;
 								cont_killed++;
 								cont_killed_2++;
 							}
 
-							// Para MR1 necesito las sumas
+							// For MR1 I need the sums
 							int sum_1 = -3, sum_2 = -3, sum_1_mut = -3, sum_2_mut = -3;
 
 							sum_durations(dicc_durations, original_mzn_original_dnz, sum_1, original_mzn_fu_dzn, sum_2,
@@ -294,9 +293,8 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 							int dur_max_1 = dicc_mayor_duration.at(mut_1);
 							int dur_max_2 = dicc_mayor_duration.at(mut_2);
 
-							// Proceso MR1 si le corresponde el fu (w==1) 
-							//if (w == 1 && matrix.value[k][1] == 0) y si no ha sido ya matado anteriormente
-
+							// Process MR1 if it corresponds to the fu (w==1) 
+							//if (w == 1 && matrix.value[k][1] == 0) and if it has not been killed previously
 
 							if (w == 1) {
 
@@ -307,7 +305,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR1++;
 
-									log << "MR1 mata a " << matrix.name[k] << endl;
+									log << "MR1 kills " << matrix.name[k] << endl;
 									// ":  O1: " << O1 << ", O2: " << O2
 									//	<< ", O1_mut: " << O1_mut << ", O2_mut: " << O2_mut << ", sum_1 " << sum_1
 									//	<< ", sum_2 " << sum_2 << ", sum_1_mut " << sum_1_mut << ", sum_2_mut " << sum_2_mut << endl;
@@ -325,7 +323,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR2++;
 
-									log << "MR2 mata a " << matrix.name[k] << endl;
+									log << "MR2 kills " << matrix.name[k] << endl;
 								}
 							}
 
@@ -339,7 +337,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR3++;
 
-									log << "MR3 mata a " << matrix.name[k] << endl;
+									log << "MR3 kills " << matrix.name[k] << endl;
 								}
 							}
 
@@ -353,7 +351,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR4++;
 
-									log << "MR4 mata a " << matrix.name[k] << endl;
+									log << "MR4 kills " << matrix.name[k] << endl;
 								}
 							}
 							if (w == 5) {
@@ -365,7 +363,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR5++;
 
-									log << "MR5 mata a " << matrix.name[k] << endl;
+									log << "MR5 kills " << matrix.name[k] << endl;
 								}
 							}
 
@@ -378,7 +376,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR6++;
 
-									log << "MR6 mata a " << matrix.name[k] << endl;
+									log << "MR6 kills " << matrix.name[k] << endl;
 								}
 							}
 							if (w == 7) {
@@ -390,7 +388,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR7++;
 
-									log << "MR7 mata a " << matrix.name[k] << endl;
+									log << "MR7 kills " << matrix.name[k] << endl;
 								}
 							}
 							if (w == 8) {
@@ -402,41 +400,41 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 									cont_killed++;
 									cont_killed_MR8++;
 
-									log << "MR8 mata a " << matrix.name[k] << endl;
+									log << "MR8 kills " << matrix.name[k] << endl;
 								}
 							}
 
 						}
 						if (cont_killed > 0) {
-							matrix.value[k][9] = 1;  //  es la columna de Killed
+							matrix.value[k][9] = 1;  //  is the Killed column
 						}
-						// cont_killed_* son o 0 o 1
+						// cont_killed_* are either 0 or 1
 						if (cont_killed_2 > 0) {
-							matrix_diff.value[k][480] = cont_killed_2;  //  es la columna de Killed 
+							matrix_diff.value[k][480] = cont_killed_2;  //  is the Killed column
 						}
 						if (cont_killed_MR1 > 0) {
-							matrix_MR1.value[k][480] = cont_killed_MR1;  //  es la columna de Killed
+							matrix_MR1.value[k][480] = cont_killed_MR1;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR2 > 0) {
-							matrix_MR2.value[k][480] = cont_killed_MR2;  //  es la columna de Killed
+							matrix_MR2.value[k][480] = cont_killed_MR2;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR3 > 0) {
-							matrix_MR3.value[k][480] = cont_killed_MR3;  //  es la columna de Killed
+							matrix_MR3.value[k][480] = cont_killed_MR3;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR4 > 0) {
-							matrix_MR4.value[k][480] = cont_killed_MR4;  //  es la columna de Killed
+							matrix_MR4.value[k][480] = cont_killed_MR4;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR5 > 0) {
-							matrix_MR5.value[k][480] = cont_killed_MR5;  //  es la columna de Killed
+							matrix_MR5.value[k][480] = cont_killed_MR5;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR6 > 0) {
-							matrix_MR6.value[k][480] = cont_killed_MR6;  //  es la columna de Killed
+							matrix_MR6.value[k][480] = cont_killed_MR6;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR7 > 0) {
-							matrix_MR7.value[k][480] = cont_killed_MR7;  //  es la columna de Killed
+							matrix_MR7.value[k][480] = cont_killed_MR7;  //  It's the column of mutants killed by this MR
 						}
 						if (cont_killed_MR8 > 0) {
-							matrix_MR8.value[k][480] = cont_killed_MR8;  //  es la columna de Killed
+							matrix_MR8.value[k][480] = cont_killed_MR8;  //  It's the column of mutants killed by this MR
 						}
 					}
 					log << "\n";
@@ -448,7 +446,8 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 		}
 	}
 
-	// Paso la matriz al fichero V9_mutants_killed.csv
+	// Transfer the matrix to the file V9_mutants_killed.csv
+	
 	for (int nrow = 0; nrow < 76; nrow++) {
 		mutants_killed << matrix.name[nrow];
 
@@ -458,7 +457,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 		mutants_killed << "\n";
 	}
 
-	// Paso la matriz al fichero V9_mutants_killed_diff_outputs.csv
+	// Transfer the matrix_MRx to the file V9_mutants_killed_diff_outputs.csv
 
 	mutants_killed_2 << "Mutant;";
 	mutants_killed_MR1 << "Mutant;";
@@ -520,35 +519,35 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 bool process_MR1(ofstream& log, int O1, int O2, int O1_mut, int O2_mut, int sum_1, int sum_2, int sum_1_mut, int sum_2_mut) {
 
-	if (O1_mut == -1) {     // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {     // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
 	if (O2_mut != sum_2_mut) {
-		log << "Se puede matar con MR1, porque O2_mut (" << O2_mut << ") es distinto que la suma de las duraciones (" << sum_2_mut << "). \n";
+		log << "This mutant can be killed with MR1, because O2_mut (" << O2_mut << ") es distinto que la suma de las duraciones (" << sum_2_mut << "). \n";
 		return true;
 	}
 
-	// log << "Este mutante NO se puede matar con MR1. La suma de las duraciones (" << sum_2_mut << ") \n";
+	// log << "This mutant cannot be killed with MR1. The sum of the durations (" << sum_2_mut << ") \n";
 	return false;
 }
 
 bool process_MR2(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {   // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {   // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
-	if (O2_mut != -1) {    // Si fu es finito (!= -1), entonces se mata
-		log << "Este mutante SI se puede matar con MR2 pq su fu es finito o timeout (!= -1). \n";
+	if (O2_mut != -1) {    // If fu is finite (!= -1), then it can be killed
+		log << "This mutant can be killed with MR2 because fu is finite or timeout (!= -1). \n";
 		return true;
 	}
 
@@ -557,28 +556,28 @@ bool process_MR2(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR3(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -2) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	// O2_mut  debe ser finito
+	// O2_mut  must be finite
 
 	if (O2_mut == -1) {   
-		log << "Este mutante SI se puede matar con MR3 pq O2_mut == -1. \n";
+		log << "This mutant can be killed with MR3 pq O2_mut == -1. \n";
 		return true;
 	}
 
 	if (O2_mut == -2) {
-		log << "Este mutante SI se puede matar con MR3 pq O2_mut es timeout. \n";
+		log << "This mutant can be killed with MR3 pq O2_mut es timeout. \n";
 		return true;
 	}
 
 	if (O2_mut <= O1_mut) {    // Si O1_mut < O2_mut (menor estricto) NO se cumple, entonces se mata
-		log << "Este mutante SI se puede matar con MR3 pq O2_mut <= O1_mut. \n";
+		log << "This mutant can be killed with MR3 pq O2_mut <= O1_mut. \n";
 		return true;
 	}
 
@@ -587,27 +586,27 @@ bool process_MR3(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR4(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
-	// Si O1 es finito entonces O2 debe ser finito
+	// Si O1 es finito entonces O2 must be finite
 	if (O2_mut == -1) {    
-		log << "Este mutante se puede matar con MR4 pq O2_mut == -1. \n";
+		log << "This mutant can be killed with MR4 because O2_mut == -1. \n";
 		return true;
 	}
 
 	if (O2_mut == -2) {    
-		log << "Este mutante se puede matar con MR4 pq O2_mut == -2. \n";
+		log << "This mutant can be killed with MR4 because O2_mut == -2. \n";
 		return true;
 	}
 
 	if (O2_mut > O1_mut) {    // Si O2_mut <= O1_mut NO se cumple, entonces se mata
-		log << "Este mutante se puede matar con MR4 pq O2_mut > O1_mut. \n";
+		log << "This mutant can be killed with MR4 because O2_mut > O1_mut. \n";
 		return true;
 	}
 
@@ -617,11 +616,11 @@ bool process_MR4(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR5(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
@@ -633,14 +632,14 @@ bool process_MR5(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 		return false;
 	}
 	
-	// Al existir tareas de duración > 0, entonces o2 debe ser > 0  
-	// Además, o1 y o2 pertenecen a R+ = { x in R | x > 0 }
+	// Since there are tasks with duration > 0, O2 must be > 0  
+	// Additionally, O1 and O2 belong to R+ = { x in R | x > 0 }
 	if (O2_mut == 0) {
 		return true;
 	}
 
 	if (O2_mut < O1_mut) {
-		log << "Este mutante se puede matar con MR5 pq O2_mut < O1_mut. \n";
+		log << "This mutant can be killed with MR5 because O2_mut < O1_mut. \n";
 		return true;
 	}
 
@@ -650,26 +649,26 @@ bool process_MR5(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR6(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
 	if (O2_mut == -1) {
-		log << "Este mutante SI se puede matar con MR6 pq O2_mut == -1. \n";
+		log << "This mutant can be killed with MR6 pq O2_mut == -1. \n";
 		return true;
 	}
 
 	if (O2_mut == -2) {
-		log << "Este mutante SI se puede matar con MR6 pq O2_mut == -2. \n";
+		log << "This mutant can be killed with MR6 pq O2_mut == -2. \n";
 		return true;
 	}
 
 	if (O2_mut > O1_mut) {
-		log << "Este mutante SI se puede matar con MR6 pq O2_mut > O1_mut. \n";
+		log << "This mutant can be killed with MR6 pq O2_mut > O1_mut. \n";
 		return true;
 	}
 
@@ -679,28 +678,28 @@ bool process_MR6(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR7(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
 	
 	if (O2_mut == -1) {
-		log << "Este mutante NO se puede matar con MR7 pq O2_mut == -1. \n";
+		log << "This mutant cannot be killed with MR7 because O2_mut == -1. \n";
 		return false;
 	}
 
 	if (O2_mut == -2) {
-		log << "Este mutante NO se puede matar con MR7 pq O2_mut == -2. \n";
+		log << "This mutant cannot be killed with MR7 because O2_mut == -2. \n";
 		return false;
 	}
 	
 
 	if (O2_mut < O1_mut) {
-		log << "Este mutante SI se puede matar con MR7 pq O2_mut < O1_mut. \n";
+		log << "This mutant can be killed with MR7 because O2_mut < O1_mut. \n";
 		return true;
 	}
 
@@ -710,26 +709,26 @@ bool process_MR7(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
 bool process_MR8(ofstream& log, int O1, int O2, int O1_mut, int O2_mut) {
 
-	if (O1_mut == -1) {    // O1_mut debe ser finito (!= -1) 
+	if (O1_mut == -1) {    // O1_mut must be finite (!= -1) 
 		return false;
 	}
 
-	if (O1_mut == -2) {     // O1_mut debe ser finito (!= -2) 
+	if (O1_mut == -2) {     // O1_mut must be finite (!= -2) 
 		return false;
 	}
 
 	if (O2_mut == -1) {
-		log << "Este mutante SI se puede matar con MR8 pq O2_mut == -1. \n";
+		log << "This mutant can be killed with MR8 because O2_mut == -1. \n";
 		return true;
 	}
 
 	if (O2_mut == -2) {
-		log << "Este mutante SI se puede matar con MR8 pq O2_mut == -2. \n";
+		log << "This mutant can be killed with MR8 because O2_mut == -2. \n";
 		return true;
 	}
 
 	if (O2_mut > O1_mut) {
-		log << "Este mutante SI se puede matar con MR8 pq O2_mut > O1_mut. \n";
+		log << "This mutant can be killed with MR8 because O2_mut > O1_mut. \n";
 		return true;
 	}
 
@@ -763,7 +762,7 @@ string extract_mzn(string file) {
 }
 
 void sum_durations_dicc(ifstream& file_in, unordered_map<string, int>& dicc_durations) {
-	// El fichero sum_durations.txt tiene nombre de fichero y su suma
+	// The file sum_durations.txt contains the file name and its sum
 	string aux;
 	int sum;
 
@@ -804,7 +803,7 @@ void sum_durations(unordered_map<string, int>& dicc_durations,
 		sum_1 = dicc_durations.at(original_mzn_original_dnz);
 	}
 	else {
-		cout << "1. La entrada: " << original_mzn_original_dnz << " NO existe en el diccionario dicc_durations" << endl;
+		cout << "1. The entry: " << original_mzn_original_dnz << " does NOT exist in the dicc_durations dictionary" << endl;
 	}
 
 	if (dicc_durations.count(original_mzn_fu_dzn) > 0) {
@@ -812,21 +811,21 @@ void sum_durations(unordered_map<string, int>& dicc_durations,
 
 	}
 	else {
-		cout << "2. La entrada: " << original_mzn_fu_dzn << " NO existe en el diccionario dicc_durations" << endl;
+		cout << "2. The entry: " << original_mzn_fu_dzn << " does NOT exist in the dicc_durations dictionary" << endl;
 	}
 
 	if (dicc_durations.count(mut_mzn_original_dzn) > 0) {
 		sum_1_mut = dicc_durations.at(mut_mzn_original_dzn);
 	}
 	else {
-		cout << "3. La entrada: " << mut_mzn_original_dzn << " NO existe en el diccionario dicc_durations" << endl;
+		cout << "3. The entry: " << mut_mzn_original_dzn << " does NOT exist in the dicc_durations dictionary" << endl;
 	}
 
 	if (dicc_durations.count(mut_mzn_fu_dzn) > 0) {
 		sum_2_mut = dicc_durations.at(mut_mzn_fu_dzn);
 	}
 	else {
-		cout << "4. La entrada: " << mut_mzn_fu_dzn << " NO existe en el diccionario dicc_durations" << endl;
+		cout << "4. The entry: " << mut_mzn_fu_dzn << " does NOT exist in the dicc_durations dictionary" << endl;
 	}
 }
 
@@ -865,7 +864,7 @@ bool check_files_and_find_Os(unordered_map<string, int>& dicc_results,
 		O1 = dicc_results.at(original_mzn_original_dnz);
 	}
 	else {
-		log << original_mzn_original_dnz << " NO encontrado. \n";
+		log << original_mzn_original_dnz << " Not found. \n";
 		result = false;
 	}
 
@@ -873,7 +872,7 @@ bool check_files_and_find_Os(unordered_map<string, int>& dicc_results,
 		O2 = dicc_results.at(original_mzn_fu_dzn);
 	}
 	else {
-		log << original_mzn_fu_dzn << " NO encontrado. \n";
+		log << original_mzn_fu_dzn << " Not found. \n";
 		result = false;
 	}
 
@@ -881,7 +880,7 @@ bool check_files_and_find_Os(unordered_map<string, int>& dicc_results,
 		O1_mut = dicc_results.at(mut_mzn_original_dzn);
 	}
 	else {
-		log << mut_mzn_original_dzn << " NO encontrado. \n";
+		log << mut_mzn_original_dzn << " Not found. \n";
 		result = false;
 	}
 
@@ -889,7 +888,7 @@ bool check_files_and_find_Os(unordered_map<string, int>& dicc_results,
 		O2_mut = dicc_results.at(mut_mzn_fu_dzn);
 	}
 	else {
-		log << mut_mzn_fu_dzn << " NO encontrado. \n";
+		log << mut_mzn_fu_dzn << " Not found. \n";
 		result = false;
 	}
 
@@ -924,7 +923,7 @@ void mutants_paths(tPaths& array_mzns, tMatrix& matrix, tMatrix_2& matrix_diff,
 	file_in >> aux;
 
 	if (!file_in) {
-		cout << "Fichero mutants.txt no encontrado  \n";
+		cout << "File mutants.txt not found  \n";
 	}
 
 	int i = 0;
