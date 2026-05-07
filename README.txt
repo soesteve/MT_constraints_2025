@@ -125,7 +125,9 @@ Metamorphic testing of scheduling problems with constraints.
 |--|--+ mut-F2E-4.mzn
 
 
-2. The main program that processes the metamorphic relations and generates all files with the 'V9_' prefix and 'csv' extension is V9_PROCESS_MRs.cpp.
+2. En este apartado se detallan los códigos fuentes de C++ contenidos en la carpeta "Project_MT_c++".
+
+2.1 The main program that processes the metamorphic relations and generates all files with the 'V9_' prefix and 'csv' extension is V9_PROCESS_MRs.cpp.
 
 
  Ficheros de entrada de V9_PROCESS_MRs.cpp:
@@ -146,7 +148,7 @@ Metamorphic testing of scheduling problems with constraints.
    * "V9_process_MRs_log_2025.txt": log del proceso. 
 
 
- 3. Los ficheros "mayor_duration.txt" y "sum_durations.txt" se ontienen con los respectivos programas GEN_SUM_and_GREATER_DURATIONS.cpp. 
+ 2.2. Los ficheros "mayor_duration.txt" y "sum_durations.txt" se ontienen con los respectivos programas GEN_SUM_and_GREATER_DURATIONS.cpp. 
 
    En total se procesan 480 x 9 = 4.320 ficheros, que corresponden a  
      benchmarks\data\data_psplib\j30\ J30_*_*.dzn  
@@ -159,9 +161,9 @@ Metamorphic testing of scheduling problems with constraints.
      benchmarks\data\data_psplib_follow_ups\MR7\ J30_*_* _fu_rr_max.dzn  (36960)
      benchmarks\data\data_psplib_follow_ups\DUR_0\ J30_*_*_fu_dur_0.dzn  (36960)
 
-4. El programa "results.cpp" hace un proceso de optimización. 
+2.3. El programa "results.cpp" hace un proceso de optimización. 
    La respuesta de la ejecución de un programa (por ejemplo mut-A2DV-1.mnz) con unos determinados datos (por ejemplo J30_1_1.dzn) se encuentra en ficheros de extensión .out (mut-A2DV-1.mzn--J30_1_1.dzn.out).
    Estos fichero .out se localizan en las carpetas "out_1", "out_2" y "out_3".  
 
 
-5. La generación de los distintos ficheros follow_ups se realizan con los programas GEN_FU_MRx.cpp, con 1 <= x <= 8.  
+2.4. La generación de los distintos ficheros follow_ups se realizan con los programas GEN_FU_MRx.cpp, con 1 <= x <= 8.  
