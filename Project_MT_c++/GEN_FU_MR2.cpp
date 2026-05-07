@@ -1,7 +1,7 @@
-// Este programa calcula los fu correspondiente a M2 
+ï»¿// Este programa calcula los fu correspondiente a M2 
 // donde se CREA UN CICLO.
 // hay un problema de eficiencia y creo varios ciclos.
-// De hecho, creo número de tareas / 2 ciclos
+// De hecho, creo nÃºmero de tareas / 2 ciclos
 
 // t1 << t2 y t2 << t1, ... t{n-1} << tn y tn << t{n-1}
  
@@ -38,22 +38,12 @@ void procesa_todos(string file_name, string fu_name);
 
 int main() {
 	
-	string path_file = "rcpsp\\data_psplib\\j30\\J30";
-	string path_fu = "rcpsp\\fu\\M2\\j30\\J30";
+	string path_file = "../benchmarks/data/data_psplib/j30/J30";
+	string path_fu = "../benchmarks/data/data_psplib_follow_ups/MR2/j30/J30";
+
 	procesa_todos(path_file, path_fu);
 
-	path_file = "rcpsp\\data_psplib\\j60\\J60";
-	path_fu = "rcpsp\\fu\\M2\\j60\\J60";
-	procesa_todos(path_file, path_fu);
-
-	path_file = "rcpsp\\data_psplib\\j90\\J90";
-	path_fu = "rcpsp\\fu\\M2\\j90\\J90";
-	procesa_todos(path_file, path_fu);
-
-	path_file = "rcpsp\\data_psplib\\j120\\J120";
-	path_fu = "rcpsp\\fu\\M2\\j120\\J120";
-	procesa_todos(path_file, path_fu);
-
+	return 0;
 }
 
 void procesa_todos(string path_file, string path_fu) {
@@ -78,15 +68,15 @@ void procesa(string file_name, string fu_name) {
 	std::string s = "";
 
 
-	// Las líneas se leen y escriben directamente pq no cambian 
-	// hasta encontrar una línea que comienza con suc
+	// Las lÃ­neas se leen y escriben directamente pq no cambian 
+	// hasta encontrar una lÃ­nea que comienza con suc
 
 	std::string prefix = "suc";
 	int num_tasks = 0;
 	getline(in, s);
 	while (s.compare(0, prefix.size(), prefix) != 0) {
 
-		// Necesito saber el número de tareas pero está pegado al ; final
+		// Necesito saber el nÃºmero de tareas pero estÃ¡ pegado al ; final
 
 		// Trabajo con expresiones regulares para quitar = ; [ ]
 		std::regex word_regex("(\\w+)");
@@ -107,9 +97,9 @@ void procesa(string file_name, string fu_name) {
 		getline(in, s);
 	}
 
-	// Ahora construyo la sucesión de precedencias
+	// Ahora construyo la sucesiÃ³n de precedencias
 
-	/* Si construyo un único ciclo de t1 << t2 y t2 << t1 tarda mucho 
+	/* Si construyo un Ãºnico ciclo de t1 << t2 y t2 << t1 tarda mucho 
 	out << "suc = [ { 2 }, " << endl;
 	out << "        { 1 }, " << endl;
 	for (size_t i = 4; i <= num_tasks; i++) {
@@ -118,7 +108,7 @@ void procesa(string file_name, string fu_name) {
 	out << "        {  }" << "]; " << endl;
 	*/
 
-	// Así que construyo más de un ciclo 
+	// AsÃ­ que construyo mÃ¡s de un ciclo 
 	//suc = [{ 2 },
 	//{ 1 },
 	//{ 4 },
@@ -149,7 +139,7 @@ void procesa(string file_name, string fu_name) {
 	//{ 27 },
 	//{ 30 },
 	//{ 29 }];
-	// y va superrrrrrr - rápido
+	// y va superrrrrrr - rÃ¡pido
 
 
 	out << "suc = [ { 2 }, " << endl;
