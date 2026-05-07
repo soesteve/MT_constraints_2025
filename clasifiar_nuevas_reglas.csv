@@ -1,6 +1,0 @@
-               ;  MR1;  MR2;  MR3;  MR4;  MR5;  MR6;  MR7;  MR8
-    precedences;1;1;1;1;     ;1;     ;1
-non_overlapping;1;     ;1;1;     ;1;     ;1
-     cumulative;     ;     ;1;1;     ;1;     ;1
-       makespan;1;     ;1;1;1;1;     ;1
-     parameters;     ;     ;1;1;     ;1;     ;1

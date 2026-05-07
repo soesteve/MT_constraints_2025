@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <fstream>
 #include <filesystem>
 #include <string>
@@ -8,10 +8,9 @@ using namespace std;
 // namespace fs = filesystem;
 
 const string path = "C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\";
-//const string name = "out_T30_230723";
-//const string name = "out_20250626_MR5_MR6_MR7_MR8";
-const string name = "out_20250710_MR5";
-
+const string name = "out_1";
+// const string name = "out_2";
+// const string name = "out_3";
 
 
 int procesar_fichero(const string& ruta) {
@@ -24,22 +23,22 @@ int procesar_fichero(const string& ruta) {
     bool contiene_UNSAT = false;
     int ultimo_makespan = -7;
 
-    // expresión regular para detectar líneas que contienen algo como: makespan = 123
+    // expresiÃ³n regular para detectar lÃ­neas que contienen algo como: makespan = 123
     // R"( ... )" es una raw string en C++: permite escribir expresiones regulares sin tener que duplicar 
     // las barras invertidas (\\) ni escapar comillas u otros caracteres especiales.
     // regex normal("makespan\\s*=\\s*(\\d+)");  es equivalente a:
     // regex raw(R"(makespan\s*=\s*(\d+))");
-    // `\s * `     Cero o más espacios en blanco(espacios, tabulaciones, etc.)                 
+    // `\s * `     Cero o mÃ¡s espacios en blanco(espacios, tabulaciones, etc.)                 
     // `=`         El signo igual literal                                                       
-    // `(\d + )`   Un grupo de captura : uno o más dígitos(es decir, un número entero positivo) 
+    // `(\d + )`   Un grupo de captura : uno o mÃ¡s dÃ­gitos(es decir, un nÃºmero entero positivo) 
 
     regex patron_makespan(R"(makespan\s*=\s*(\d+))");
     
     // smatch es un alias de tipo (typedef) para std::match_results<std::string::const_iterator>
     // Se usa cuando trabajas con std::string y expresiones regulares (std::regex).
-    // match para almacenar los resultados de la búsqueda con regex_search.
-    // match[0] contendrá toda la coincidencia completa.
-    // match[1] contendrá el número del makespan(capturado por(\d + )).
+    // match para almacenar los resultados de la bÃºsqueda con regex_search.
+    // match[0] contendrÃ¡ toda la coincidencia completa.
+    // match[1] contendrÃ¡ el nÃºmero del makespan(capturado por(\d + )).
 
     smatch match;
 
@@ -54,7 +53,7 @@ int procesar_fichero(const string& ruta) {
             contiene_UNSAT = true;
         }
         // regex_search(...) Busca (no necesariamente al inicio) 
-        // una parte del texto que coincida con una expresión regular.
+        // una parte del texto que coincida con una expresiÃ³n regular.
         if (regex_search(linea, match, patron_makespan)) {
             ultimo_makespan = stoi(match[1]);   // stoi(...) convierte ese string a entero
         }
@@ -106,7 +105,7 @@ int search_makespan(const string name_in) {
             sregex_iterator i = sregex_iterator(s.begin(), s.end(), word_regex);
 
             // Avanzo 1 el iterador pq s tiene algo como: makespan = 167
-            // y el = no lo guarda por ser expresi—n regular
+            // y el = no lo guarda por ser expresiâ€”n regular
             ++i;
             smatch match = *i;
             string match_str = match.str();
@@ -145,7 +144,7 @@ int main() {
             }
         }
 
-        // Ordenamos alfabéticamente por nombre de fichero
+        // Ordenamos alfabÃ©ticamente por nombre de fichero
         sort(ficheros.begin(), ficheros.end(), [](const filesystem::directory_entry& a, const filesystem::directory_entry& b) {
             return a.path().filename().string() < b.path().filename().string();
             });
