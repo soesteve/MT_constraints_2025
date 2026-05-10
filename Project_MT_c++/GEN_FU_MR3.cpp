@@ -1,7 +1,9 @@
-﻿
-// This program calculates the fu corresponding to MR3
-// where the value of a duration is incremented.
-// Specifically, it must be greater than the sum of all durations
+﻿// This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
+// specifically for the J30 problem set. 
+// The program calculates the follow-ups corresponding to MR3 based on the original .dzn files,
+// and they contain a new set of durations where the duration of the first task must be greater than the sum of all durations
+// In particualar, it is the sum + 1,
+
 
 #include <iostream>
 #include <fstream>
@@ -16,19 +18,19 @@ struct tFiles {
 };
 
 
-void procesa(string file_name, string fu_name);
-void procesa_todos(string file_name, string fu_name);
+void process(string file_name, string fu_name);
+void process_all(string file_name, string fu_name);
 
 
 int main() {
 
 	string path_file = "../benchmarks/data/data_psplib/j30/J30";
 	string path_fu = "../benchmarks/data/data_psplib_follow_ups/MR3/j30/J30";
-	procesa_todos(path_file, path_fu);
+	process_all(path_file, path_fu);
 
 }
 
-void procesa_todos(string path_file, string path_fu) {
+void process_all(string path_file, string path_fu) {
 
 	string s = "";
 
@@ -36,12 +38,12 @@ void procesa_todos(string path_file, string path_fu) {
 		for (int j = 1; j <= 10; j++) {  // 10
 			string path_file_aux = path_file + "_" + to_string(i) + "_" + to_string(j);
 			string path_fu_aux = path_fu + "_" + to_string(i) + "_" + to_string(j);
-			procesa(path_file_aux, path_fu_aux);
+			process(path_file_aux, path_fu_aux);
 		}
 	}
 }
 
-void procesa(string file_name, string fu_name) {
+void process(string file_name, string fu_name) {
 
 	ifstream in(file_name + ".dzn");
 	if (!in) {
@@ -70,7 +72,7 @@ void procesa(string file_name, string fu_name) {
 
 		// I need to know the number of tasks but it's stuck to the final ;
 
-		// I use iteratos
+		// iteratos
 		std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 		std::smatch match = *i;
 		std::string match_str = match.str();

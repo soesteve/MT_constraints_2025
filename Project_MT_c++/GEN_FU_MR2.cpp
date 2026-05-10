@@ -2,8 +2,8 @@
 
 // This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
 // specifically for the J30 problem set. 
-// The program calculates the follow-ups corresponding to MR2
-// The program reads the original .dzn files, and creates new .dzn files 
+// The program calculates the follow-ups corresponding to MR2 and,
+// reads the original .dzn files, and creates new .dzn files 
 // with modified precedence constraints (fu) to create a cycle 
 // between pairs of tasks (t1 << t2 and t2 << t1) 
 
@@ -33,8 +33,8 @@ struct tFiles {
 	string texto = "";
 };
 
-void procesa(string file_name, string fu_name);
-void procesa_todos(string file_name, string fu_name);
+void process(string file_name, string fu_name);
+void process_all(string file_name, string fu_name);
 
 
 int main() {
@@ -42,25 +42,23 @@ int main() {
 	string path_file = "../benchmarks/data/data_psplib/j30/J30";
 	string path_fu = "../benchmarks/data/data_psplib_follow_ups/MR2/j30/J30";
 
-	procesa_todos(path_file, path_fu);
-
+	process_all(path_file, path_fu);
 	return 0;
 }
 
-void procesa_todos(string path_file, string path_fu) {
-
+void process_all(string path_file, string path_fu) {
 	string s = "";
 
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string path_file_aux = path_file + "_" + to_string(i) + "_" + to_string(j);
 			string path_fu_aux = path_fu + "_" + to_string(i) + "_" + to_string(j);
-			procesa(path_file_aux, path_fu_aux);
+			process(path_file_aux, path_fu_aux);
 		}
 	}
 }
 
-void procesa(string file_name, string fu_name) {
+void process(string file_name, string fu_name) {
 	string aux = file_name + ".dzn";
 	ifstream in(aux);
 	ofstream out(fu_name + "_fu_cycle.dzn");   //  MR2

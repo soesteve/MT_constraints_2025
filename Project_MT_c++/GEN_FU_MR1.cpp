@@ -25,7 +25,7 @@
 #include <filesystem>
 using namespace std;
 
-void processes(string file_name, string fu_name);
+void process(string file_name, string fu_name);
 
 struct tFiles {
 	string nombre = "";
@@ -42,16 +42,15 @@ int main() {
 		for (int j = 1; j <= 10; j++) {  // 10
 			string path_file_aux = path_file + "_" + to_string(i) + "_" + to_string(j);
 			string path_fu_aux = path_fu + "_" + to_string(i) + "_" + to_string(j);
-			processes(path_file_aux, path_fu_aux);
+			process(path_file_aux, path_fu_aux);
 		}
 	}
 }
 
-void processes(string file_name, string fu_name) {
+void process(string file_name, string fu_name) {
 
 	string aux = file_name + ".dzn";
 
-	cout << "Intentando abrir: " << aux << endl;
 
 	ifstream in(aux);
 	if (!in.is_open()) {
