@@ -1,5 +1,7 @@
-// Este programa calcula la suma de las duraciones
-// para luego aplicar MR1
+ï»¿// This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
+// specifically for the J30 problem set. 
+// The program calculates the sum of the durations and the greatest duration for each .dzn file, 
+// and writes the results in two separate files: sum_durations.txt and mayor_duration.txt
 
 
 #include <iostream>
@@ -10,7 +12,7 @@
 #include <filesystem>
 using namespace std;
 
-const string path = "C:\\Users\\Sonia\\Desktop\\MT_constraints_2025\\";
+const string path = "../";
 
 void proc_sum_dur(string path_file, string name_file, ofstream& file_sum);
 void proc_greater_dur(string path_file, string name_file, ofstream& file_sum);
@@ -18,9 +20,18 @@ void proc_greater_dur(string path_file, string name_file, ofstream& file_sum);
 int main()
 {
 	ofstream file_sum(path + "sum_durations.txt");
-	ofstream file_greater(path + "mayor_duration.txt");
+	if (!file_sum) {
+		cerr << "Unable to open file " << path + "sum_durations.txt" << endl;
+		exit(1);   // call system to stop
+	}
+	ofstream file_greater(path + "longer_duration.txt");
+	if (!file_greater) {
+		cerr << "Unable to open file " << path + "longer_duration.txt" << endl;
+		exit(1);   // call system to stop
+	}
 
-	string path_file = path + "benchmarks\\data\\data_psplib\\j30\\";
+	string path_file = path + "benchmarks/data/data_psplib/j30/";
+
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + ".dzn";
@@ -29,7 +40,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR1\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR1/j30/";
 
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
@@ -39,7 +50,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR2\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR2/j30/";
 
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
@@ -49,7 +60,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR3\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR3/j30/";
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_d.dzn";
@@ -58,7 +69,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR4\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR4/j30/";
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			for (int k = 1; k <= 1; k++) {  // 4
@@ -69,7 +80,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR5\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR5/j30/";
 
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
@@ -79,7 +90,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR6\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR6/j30/";
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_rc_and_rr_0.dzn";
@@ -88,7 +99,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR7\\j30\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR7/j30/";
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_rr_max.dzn";
@@ -97,7 +108,7 @@ int main()
 		}
 	}
 
-	path_file = path + "benchmarks\\data\\data_psplib_follow_ups\\MR8\\";
+	path_file = path + "benchmarks/data/data_psplib_follow_ups/MR8/j30/";
 	for (int i = 1; i <= 48; i++) {  // 48
 		for (int j = 1; j <= 10; j++) {  // 10
 			string name_file = "J30_" + to_string(i) + "_" + to_string(j) + "_fu_dur_0.dzn";
@@ -128,24 +139,24 @@ void proc_sum_dur(string path_file, string name_file, ofstream& file_sum) {
 	getline(file_in, s);   // rc
 	getline(file_in, s);   // n_tasks
 
-	// Trabajo con expresiones regulares para quitar = ; [ ]
+	// Regular expressions to remove = ; [ ]
 	std::regex word_regex("(\\w+)");
 
-	// Uso iteradores
+	// iterators
 	std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 	++i;
 	std::smatch match = *i;
 	std::string match_str = match.str();
-	int num_tasks = stoi(match_str);  // casting de string a int
+	int num_tasks = stoi(match_str);  // casting from string to int
 
 	getline(file_in, s);   // d
 
 	i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 
-	// Las líneas se leen y escriben directamente pq no cambian
-	// hasta encontrar una línea que comienza con suc
+	// Lines are read and written directly because they do not change
+	// suc until a line that starts with suc 
 
-	// Sumo las duraciones
+	// Sum durations
 	int suma = 0;
 	for (int k = 0; k < num_tasks; k++) {
 		++i;
@@ -177,10 +188,8 @@ void proc_greater_dur(string path_file, string name_file, ofstream& file_sum) {
 	getline(file_in, s);   // rc
 	getline(file_in, s);   // n_tasks
 
-	// Trabajo con expresiones regulares para quitar = ; [ ]
 	std::regex word_regex("(\\w+)");
 
-	// Uso iteradores
 	std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 	++i;
 	std::smatch match = *i;
@@ -191,10 +200,6 @@ void proc_greater_dur(string path_file, string name_file, ofstream& file_sum) {
 
 	i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 
-	// Las líneas se leen y escriben directamente pq no cambian
-	// hasta encontrar una línea que comienza con suc
-
-	// Sumo las duraciones
 	int mayor = 0;
 	for (int k = 0; k < num_tasks; k++) {
 		++i;
