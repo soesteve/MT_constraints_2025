@@ -203,7 +203,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 	ofstream mutants_killed_MR8(path_out + "V9_killed_MR8.csv");
 
 	string s = "";
-	ofstream log(path_out + "V9_process_MRs_log.txt");
+	ofstream log(path_out + "V9_process_MRs_log_2025.txt");
 
 	int cont_log = 0;
 	int cont_killed, cont_killed_2 = 0, cont_killed_MR1 = 0, cont_killed_MR2 = 0, cont_killed_MR3 = 0,
