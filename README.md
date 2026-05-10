@@ -1,9 +1,12 @@
 
-Metamorphic testing of scheduling problems with constraints.
+# Combining mutation testing and metamorphic testing for MiniZinc scheduling problems.
 
 
-1. Distribution of 'benchmarks' folder:
+## 1. Distribution of 'benchmarks' folder:
 
+
+
+```
 + benchmarks
 |--+ data
 |--|--+ data_psplib
@@ -123,16 +126,16 @@ Metamorphic testing of scheduling problems with constraints.
 |--|--+ mut-A2M-1.mzn
 |--|--+ mut-LT2LE-1.mzn
 |--|--+ mut-F2E-4.mzn
+```
+
+## 2. En este apartado se detallan los códigos fuentes de C++ contenidos en la carpeta "Project_MT_c++".
+
+### 2.1 The main program that processes the metamorphic relations and generates all files with the 'V9_' prefix and 'csv' extension is V9_PROCESS_MRs.cpp.
 
 
-2. En este apartado se detallan los códigos fuentes de C++ contenidos en la carpeta "Project_MT_c++".
+ Input files of **V9_PROCESS_MRs.cpp**:
 
-2.1 The main program that processes the metamorphic relations and generates all files with the 'V9_' prefix and 'csv' extension is V9_PROCESS_MRs.cpp.
-
-
- Ficheros de entrada de V9_PROCESS_MRs.cpp:
-
-   * Los distintos makespan que se obtienen de ejecutar un programa minizinc (mzn) con los datos  dadas en un fichero dzn. En concreto, lee los ficheros "out_x.txt" con x = 1,2 y 3.
+   * Los distintos makespan que se obtienen de ejecutar un programa minizinc (mzn) con los datos dadas en un fichero dzn. En concreto, lee los ficheros "out_x.txt" con x = 1,2 y 3.
 
    * "sum_durations.txt" contiene la suma de las duraciones de todas las tareas de cada fichero dzn.
 
@@ -140,30 +143,42 @@ Metamorphic testing of scheduling problems with constraints.
 
  Ficheros de salida de V9_PROCESS_MRs.cpp:
 
-   * "V9_mutants_killed_2025.csv": fichero resumen de los mutantes matados por dos procesos. El primer proceso compara el resultado o1 con o1_mutado y, el segundo proceso por la la  aplicación de las distintas MRs (1 significa muerto y o vivo). Esta información es obtenida de los siguientes ficheros:  
+Programa principal que procesa las reglas metamórficas MR1, ..., MR8
+Los resultados se muestra en 
 
-   * "V9_killed_different_outputs.csv" matriz detallada de la columna O1!=O1_mut
-   "V9_killed_MRx.csv" con 1 <= x <= 8 
+* V9_mutants_killed.csv: fichero resumen de los mutantes matados por dos procesos.
+La primera columna compara el resultado o1 con o1_mutado y, las demás columnas muestran los resultados de aplicar las distintas MRs (1 significa muerto y o vivo). Esta información es obtenida de los siguientes ficheros:
 
-   * "V9_process_MRs_log_2025.txt": log del proceso. 
+    * V9_killed_different_outputs.csv: matriz detallada de la columna O1 != O1_mut "V9_killed_MRx.csv" con 1 <= x <= 8
+
+    * V9_killed_MRx.csv con 1 <= x <= 8
+
+* V9_process_MRs_log.txt: log del proceso.
 
 
- 2.2. Los ficheros "mayor_duration.txt" y "sum_durations.txt" se ontienen con los respectivos programas GEN_SUM_and_GREATER_DURATIONS.cpp. 
 
+
+
+### 2.2. Los ficheros "mayor_duration.txt" y "sum_durations.txt" se ontienen con los respectivos programas GEN_SUM_and_GREATER_DURATIONS.cpp. 
+
+```
    En total se procesan 480 x 9 = 4.320 ficheros, que corresponden a  
      benchmarks\data\data_psplib\j30\ J30_*_*.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR1\ J30_*_*_fu_all_prec.dzn  (36960)
-     benchmarks\data\data_psplib_follow_ups\MR2\ J30_*_*_fu_cycle.dzn   (36960)
-     benchmarks\data\data_psplib_follow_ups\MR3\ J30_*_*_fu_d.dzn   (36960)
-     benchmarks\data\data_psplib_follow_ups\MR4\ J30_*_*_fu_rc_1.dzn  (36960)
-     benchmarks\data\data_psplib_follow_ups\MR5\ J30_*_*_ fu_1_rc_mayor_rr (36960)
-     benchmarks\data\data_psplib_follow_ups\MR6\ J30_*_*_ fu_rc_and_rr_0  (36960)
-     benchmarks\data\data_psplib_follow_ups\MR7\ J30_*_* _fu_rr_max.dzn  (36960)
-     benchmarks\data\data_psplib_follow_ups\DUR_0\ J30_*_*_fu_dur_0.dzn  (36960)
+     benchmarks\data\data_psplib_follow_ups\MR1\ J30_*_*_fu_all_prec.dzn  
+     benchmarks\data\data_psplib_follow_ups\MR2\ J30_*_*_fu_cycle.dzn   
+     benchmarks\data\data_psplib_follow_ups\MR3\ J30_*_*_fu_d.dzn   
+     benchmarks\data\data_psplib_follow_ups\MR4\ J30_*_*_fu_rc_1.dzn  
+     benchmarks\data\data_psplib_follow_ups\MR5\ J30_*_*_ fu_1_rc_mayor_rr 
+     benchmarks\data\data_psplib_follow_ups\MR6\ J30_*_*_ fu_rc_and_rr_0  
+     benchmarks\data\data_psplib_follow_ups\MR7\ J30_*_* _fu_rr_max.dzn  
+     benchmarks\data\data_psplib_follow_ups\DUR_0\ J30_*_*_fu_dur_0.dzn  
+```
 
-2.3. El programa "results.cpp" hace un proceso de optimización. 
+### 2.3. El programa "results.cpp" hace un proceso de optimización. 
    La respuesta de la ejecución de un programa (por ejemplo mut-A2DV-1.mnz) con unos determinados datos (por ejemplo J30_1_1.dzn) se encuentra en ficheros de extensión .out (mut-A2DV-1.mzn--J30_1_1.dzn.out).
    Estos fichero .out se localizan en las carpetas "out_1", "out_2" y "out_3".  
 
 
-2.4. La generación de los distintos ficheros follow_ups se realizan con los programas GEN_FU_MRx.cpp, con 1 <= x <= 8.  
+### 2.4. La generación de los distintos ficheros follow_ups se realizan con los programas GEN_FU_MRx.cpp, con 1 <= x <= 8.  
+
+
