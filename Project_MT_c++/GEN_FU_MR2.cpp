@@ -1,14 +1,15 @@
-﻿// Este programa calcula los fu correspondiente a M2 
-// donde se CREA UN CICLO.
-// hay un problema de eficiencia y creo varios ciclos.
-// De hecho, creo número de tareas / 2 ciclos
+﻿
 
-// t1 << t2 y t2 << t1, ... t{n-1} << tn y tn << t{n-1}
+// This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
+// specifically for the J30 problem set. 
+// The program calculates the follow-ups corresponding to MR2
+// The program reads the original .dzn files, and creates new .dzn files 
+// with modified precedence constraints (fu) to create a cycle 
+// between pairs of tasks (t1 << t2 and t2 << t1) 
+
+// t1 << t2 and t2 << t1, ... t{n-1} << tn and tn << t{n-1}
  
-// Para el fichero j30_1_1.dzn tenemos
-//  n_tasks = 30;
- 
-// el fichero j30_1_1_fu_all_prec.dzn 
+// In the file j30_1_1_fu_all_prec.dzn  we have the following precedence constraints:
 // suc = [ { 2 }, 
         // { 1 }, 
         // { 4 }, 
@@ -62,26 +63,27 @@ void procesa_todos(string path_file, string path_fu) {
 void procesa(string file_name, string fu_name) {
 	string aux = file_name + ".dzn";
 	ifstream in(aux);
-//	ofstream out(fu_name + "_fu_all_prec.dzn");   // OJO M1
-	ofstream out(fu_name + "_fu_cycle.dzn");   // OJO M2
+	ofstream out(fu_name + "_fu_cycle.dzn");   //  MR2
 
 	std::string s = "";
 
 
-	// Las líneas se leen y escriben directamente pq no cambian 
-	// hasta encontrar una línea que comienza con suc
+	// Lines are read and written directly because they do not change
+	// until a line starting with suc is found
 
 	std::string prefix = "suc";
 	int num_tasks = 0;
 	getline(in, s);
 	while (s.compare(0, prefix.size(), prefix) != 0) {
 
-		// Necesito saber el número de tareas pero está pegado al ; final
+		// Number of tasks is needed but it is attached to the final ;
 
 		// Trabajo con expresiones regulares para quitar = ; [ ]
+		// I use regular expressions to extract = ; []
+		// https://en.cppreference.com/w/cpp/regex
 		std::regex word_regex("(\\w+)");
 
-		// Uso iteradores 
+		// I use iterators
 		std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 		std::smatch match = *i;
 		std::string match_str = match.str();
@@ -90,16 +92,16 @@ void procesa(string file_name, string fu_name) {
 			++i;
 			match = *i;
 			match_str = match.str();
-			num_tasks = stoi(match_str);  // casting de string a int
+			num_tasks = stoi(match_str);  // casting from string to int
 		}
 
 		out << s << endl;
 		getline(in, s);
 	}
 
-	// Ahora construyo la sucesión de precedencias
+	// Now I build the succession of precedences
 
-	/* Si construyo un único ciclo de t1 << t2 y t2 << t1 tarda mucho 
+	/* If I build a single cycle of t1 << t2 and t2 << t1 it takes a long time
 	out << "suc = [ { 2 }, " << endl;
 	out << "        { 1 }, " << endl;
 	for (size_t i = 4; i <= num_tasks; i++) {
@@ -108,7 +110,7 @@ void procesa(string file_name, string fu_name) {
 	out << "        {  }" << "]; " << endl;
 	*/
 
-	// Así que construyo más de un ciclo 
+	// So I build more than one cycle
 	//suc = [{ 2 },
 	//{ 1 },
 	//{ 4 },
@@ -139,7 +141,6 @@ void procesa(string file_name, string fu_name) {
 	//{ 27 },
 	//{ 30 },
 	//{ 29 }];
-	// y va superrrrrrr - rápido
 
 
 	out << "suc = [ { 2 }, " << endl;

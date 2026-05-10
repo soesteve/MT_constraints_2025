@@ -1,10 +1,13 @@
-﻿// Este programa calcula los fu correspondiente a M1 
-// donde se disponen todas las tareas de forma secuencial
+﻿
+// This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
+// specifically for the J30 problem set. 
+// The program calculates the follow-ups corresponding to MR1 based on the original .dzn files,
+// and they contain a new set of precedence constraints where all tasks are arranged sequentially, 
+// meaning that task 1 precedes task 2, task 2 precedes task 3, and so on, up to task n.
 // t1 << t2 << t3 << ... << tn
-// Para el fichero j30_1_1.dzn tenemos
-//  n_tasks = 30;
- 
-// el fichero j30_1_1_fu_all_prec.dzn 
+
+
+// file j30_1_1_fu_all_prec.dzn we have the following precedence constraints:
 // suc = [ { 2 }, 
 //         { 3 }, 
 //         { 4 }, 
@@ -19,6 +22,7 @@
 #include <iterator>
 #include <string>
 #include <regex>
+#include <filesystem>
 using namespace std;
 
 void processes(string file_name, string fu_name);
@@ -44,26 +48,39 @@ int main() {
 }
 
 void processes(string file_name, string fu_name) {
+
 	string aux = file_name + ".dzn";
+
+	cout << "Intentando abrir: " << aux << endl;
+
 	ifstream in(aux);
+	if (!in.is_open()) {
+		cerr << "Error al abrir el archivo: " << aux << endl;
+		return;
+	}
+	
 	ofstream out(fu_name + "_fu_all_prec.dzn"); 
+	if(!out.is_open()) {
+		cerr << "Error al crear el archivo: " << fu_name + "_fu_all_prec.dzn" << endl;
+		return;
+	}
 
 	std::string s = "";
 
 
-	// Las líneas se leen y escriben directamente pq no cambian 
-	// hasta encontrar una línea que comienza con suc
+	// Lines are read and written directly because they do not change
+	// until a line starting with suc is found
 
 	std::string prefix = "suc";
 	int num_tasks = 0;
 	getline(in, s);
 	while (s.compare(0, prefix.size(), prefix) != 0) {
-		// Necesito saber el número de tareas pero está pegado al ; final
+		// Number of tasks is needed but it is attached to the final ;
 
-		// Trabajo con expresiones regulares para quitar = ; [ ]
+		// I use regular expressions to extract = ; []
 		std::regex word_regex("(\\w+)");
 
-		// Uso iteradores 
+		// iterators
 		std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 		std::smatch match = *i;
 		std::string match_str = match.str();
@@ -72,14 +89,14 @@ void processes(string file_name, string fu_name) {
 			++i;
 			match = *i;
 			match_str = match.str();
-			num_tasks = stoi(match_str);  // casting de string a int
+			num_tasks = stoi(match_str);  // casting from string to int
 		}
 
 		out << s << endl;
 		getline(in, s);
 	}
 
-	// Ahora construyo la sucesión de precedencias
+	// Now I build the succession of precedences
 
 	out << "suc = [ { 2 }, " << endl;
 	for (size_t i = 3; i <= num_tasks; i++){

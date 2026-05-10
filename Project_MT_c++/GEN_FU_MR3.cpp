@@ -1,6 +1,7 @@
-// Este programa calcula los fu correspondiente a M3 
-// donde se incrementa el valor de una duration 
-// En concreto ha de ser mayor que la suma de todas las durations
+ï»¿
+// This program calculates the fu corresponding to MR3
+// where the value of a duration is incremented.
+// Specifically, it must be greater than the sum of all durations
 
 #include <iostream>
 #include <fstream>
@@ -21,20 +22,8 @@ void procesa_todos(string file_name, string fu_name);
 
 int main() {
 
-	string path_file = "rcpsp\\data_psplib\\j30\\J30";
-	string path_fu = "rcpsp\\fu\\M3\\j30\\J30";/Users/soniaestevez/Library/CloudStorage/GoogleDrive-soesteve@ucm.es/My Drive/TESTING_MINIZINC/GEN_FU_M3.cpp
-	procesa_todos(path_file, path_fu);
-
-	path_file = "rcpsp\\data_psplib\\j60\\J60";
-	path_fu = "rcpsp\\fu\\M3\\j60\\J60";
-	procesa_todos(path_file, path_fu);
-
-	path_file = "rcpsp\\data_psplib\\j90\\J90";
-	path_fu = "rcpsp\\fu\\M3\\j90\\J90";
-	procesa_todos(path_file, path_fu);
-
-	path_file = "rcpsp\\data_psplib\\j120\\J120";
-	path_fu = "rcpsp\\fu\\M3\\j120\\J120";
+	string path_file = "../benchmarks/data/data_psplib/j30/J30";
+	string path_fu = "../benchmarks/data/data_psplib_follow_ups/MR3/j30/J30";
 	procesa_todos(path_file, path_fu);
 
 }
@@ -55,25 +44,33 @@ void procesa_todos(string path_file, string path_fu) {
 void procesa(string file_name, string fu_name) {
 
 	ifstream in(file_name + ".dzn");
-	ofstream out(fu_name + "_fu_d.dzn");   // OJO M3
+	if (!in) {
+		cerr << "Unable to open file " << file_name + ".dzn" << endl;
+		exit(1);   // call system to stop
+	}
+	ofstream out(fu_name + "_fu_d.dzn");   // MR3
+	if (!out) {
+		cerr << "Unable to open file " << fu_name + "_fu_d.dzn" << endl;
+		exit(1);   // call system to stop
+	}
 
 	std::string s = "";
 
-	// Las líneas se leen y escriben directamente pq no cambian 
-	// hasta encontrar una línea que comienza con d
+	// The lines are read and written directly because they don't change
+	// until a line that begins with d is found.
 
 	std::string prefix = "d";
 
-	// Trabajo con expresiones regulares para quitar = ; [ ]
+	// I work with regular expressions to remove = ; [ ]
 	std::regex word_regex("(\\w+)");
 
 	int num_tasks = 0;
 	std::getline(in, s);
 	while (s.compare(0, prefix.size(), prefix) != 0) {
 
-		// Necesito saber el número de tareas pero está pegado al ; final
+		// I need to know the number of tasks but it's stuck to the final ;
 
-		// Uso iteradores 
+		// I use iteratos
 		std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 		std::smatch match = *i;
 		std::string match_str = match.str();
@@ -82,16 +79,16 @@ void procesa(string file_name, string fu_name) {
 			++i;
 			match = *i;
 			match_str = match.str();
-			num_tasks = stoi(match_str);  // casting de string a int
+			num_tasks = stoi(match_str);  // casting from string to int
 		}
 
 		out << s << endl;
 		std::getline(in, s);
 	}
 
-	// la línea que tengo en s es de la forma d = [...]
+	// The line I have in s is of the form d = [...]
 
-	int var_sum = 1;  // empieza en 1 pq es mayor estricto a la suma de todas las duraciones
+	int var_sum = 1;  // starts at 1 because it is strictly greater than the sum of all durations
 
 	std::sregex_iterator i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 	std::smatch match = *i;
@@ -99,8 +96,8 @@ void procesa(string file_name, string fu_name) {
 
 	string* array_din_durations = new string[num_tasks];
 
-	// Guardo los datos d = [ ... ]; en un array dinámico array_din_durations
-	// y de paso voy haciendo la suma
+	// I store the data d = [ ... ]; in a dynamic array array_din_durations
+	// and at the same time I calculate the sum
 	for (int k = 0; k < num_tasks; k++) {
 		++i;
 		match = *i;
@@ -109,7 +106,7 @@ void procesa(string file_name, string fu_name) {
 		var_sum += stoi(match_str);
 	}
 
-	// Genero la salida
+	// Generate the output
 
 	out << "d = [ ";
 
@@ -118,15 +115,15 @@ void procesa(string file_name, string fu_name) {
 			out << to_string(var_sum);
 		}
 		else {
-			out << array_din_durations[k];   // añado elemento a elemento
+			out << array_din_durations[k];   // add element by element
 		}
 		out << ", ";
 	}
 
-	// Escribo el último elemento y cierro
+	// Write the last element and close
 	out << array_din_durations[num_tasks-1] << " ];\n";
 
-	// El resto de líneas se leen y escriben directamente pq no cambian
+	// The rest of the lines are read and written directly because they don't change
 
 	getline(in, s);
 	while (in) {
