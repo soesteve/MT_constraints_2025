@@ -24,9 +24,9 @@ int main()
 		cerr << "Unable to open file " << path + "sum_durations.txt" << endl;
 		exit(1);   // call system to stop
 	}
-	ofstream file_greater(path + "longer_duration.txt");
+	ofstream file_greater(path + "longer_durations.txt");
 	if (!file_greater) {
-		cerr << "Unable to open file " << path + "longer_duration.txt" << endl;
+		cerr << "Unable to open file " << path + "longer_durations.txt" << endl;
 		exit(1);   // call system to stop
 	}
 
