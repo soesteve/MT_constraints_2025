@@ -1,4 +1,11 @@
-﻿#include <iostream>
+﻿// It is the main program that processes metamorphic relations.
+
+
+// This program generates all CSV files prefixed with 'V9_' and the log file V9_process_MRs_log.txt.
+
+
+
+#include <iostream>
 #include <fstream>
 #include <iterator>
 #include <string>
