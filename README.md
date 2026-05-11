@@ -129,13 +129,13 @@
 
 ## 2. This section details the C++ source code contained in the **Project_MT_c++** folder.
 
-### 2.1 The main program.
+### 2.1 The main program. 
 
 **V9_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and, generates all files with the 'V9_' prefix and 'csv' extension. Specifically, this program generates the file **V9_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V9_process_MRs_log.txt**.
 
 
 
-* Input files of **V9_PROCESS_MRs.cpp**:
+* Input files of **V9_PROCESS_MRs.cpp** are:
 
    * **sum_durations.txt**: It contains the sum of the durations of all the tasks in each dzn file.
 
@@ -144,7 +144,7 @@
    * **out_1.txt**, **out_2.txt** and **out_3.txt**: These files contain the different makespans obtained from running the Minizinc (mzn) programs, model and mutants,
 with the data (dzn), originals and follow-ups.
 
-* Output files of **V9_PROCESS_MRs.cpp**:
+* Output files of **V9_PROCESS_MRs.cpp** are:
 
    * **V9_mutants_killed.csv**: Summary file of the mutants killed by two processes. The first process is represented by the first column and compares the result of the original model with the mutated model. The other columns show the results of applying the different MRs (1 means killed and/or alive). This information is obtained from the files shown below.
 
@@ -157,6 +157,7 @@ with the data (dzn), originals and follow-ups.
 
 
 ### 2.2. Auxiliary program.
+
 **GEN_SUM_and_GREATER_DURATIONS.cpp**: This program processes the following files to obtain, for each file, the sum of the durations of the tasks and the longest-lasting task.
 
 ``` 
