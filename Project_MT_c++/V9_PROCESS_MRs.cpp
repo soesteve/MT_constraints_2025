@@ -1,7 +1,37 @@
-﻿// It is the main program that processes metamorphic relations.
+﻿/*
+
+**V9_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and, 
+generates all files with the 'V9_' prefix. 
+Specifically, this program generates the file **V9_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V9_process_MRs_log.txt**.
 
 
-// This program generates all CSV files prefixed with 'V9_' and the log file V9_process_MRs_log.txt.
+
+* Input files of **V9_PROCESS_MRs.cpp**:
+
+   * **sum_durations.txt**: It contains the sum of the durations of all the tasks in each dzn file.
+
+   * **longer_durations.txt**: It contains the longest duration of all tasks in each dzn file.
+
+   * **out_1.txt**, **out_2.txt** and **out_3.txt**: These files contain the different makespans obtained 
+   from running the Minizinc (mzn) programs, model and mutants, with the data (dzn), originals and follow-ups.
+
+* Output files of **V9_PROCESS_MRs.cpp**:
+
+   * **V9_mutants_killed.csv**: Summary file of the mutants killed by two processes. 
+   The first process is represented by the first column and compares the result of the original model 
+   with the mutated model (1 means killed and/or alive). 
+   The other columns show the results of applying the different MRs. 
+   This information is obtained from the files * **V9_killed_different_outputs.csv** and **V9_killed_MRx.csv** with 1 <= x <= 8.
+
+   * **V9_killed_different_outputs.csv**: Detailed matrix of the process comparing the result of the original model with the mutated model.
+
+   * **V9_killed_MRx.csv** with 1 <= x <= 8: Detailed matrices show the results of applying the different MRs.
+
+   * **V9_process_MRs_log.txt**: Process log.
+
+
+
+*/
 
 
 

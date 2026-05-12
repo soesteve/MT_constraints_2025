@@ -1,12 +1,12 @@
 
-# Combining mutation testing and metamorphic testing for MiniZinc scheduling problems.
+# Mutation testing and metamorphic testing for MiniZinc scheduling problems.
 
 
 ## This section details the C++ source code contained in the **Project_MT_c++** folder.
 
 ### 1. Generation of follow_ups files. 
 
-The generation of the different follow_ups files is done with the **GEN_FU_MRx.cpp** programs, with 1 <= x <= 8. The new dzn files have the same name as the original (J30_\*\_*) followed by \_fu\_ and a description of the corresponding MR and the extension .dzn. 
+The generation of the different follow_ups files is done with the **GEN_FU_MRx.cpp** programs, with 1 <= x <= 8. The new dzn files have the same name as the original (J30_\*\_*) followed by \_fu\_ and a description of the corresponding MR. All these files have the dzn extension. 
 
 ``` 
 Original
@@ -28,16 +28,14 @@ Follow-ups
 The program **results.cpp** performs an optimization process. 
 
 First, let's clarify that the output of a program (e.g., mut-A2DV-1.mnz) running on specific data (e.g., J30_1_1.dzn) is stored in an .out file (mut-A2DV-1.mzn--J30_1_1.dzn.out).
-Then, the **results.cpp** code processes the answers (.out) contained in the "out_1", "out_2", and "out_3" folders to extract the *makespan* values (or the "TIMEOUT" and "UNSATISFIABLE"). Specifically, this program uses regular expressions to find the information.
+Then, the **results.cpp** code processes the answers (.out) contained in the "out_1", "out_2", and "out_3" folders to extract the *makespan* value or *TIMEOUT* or *UNSATISFIABLE*. Specifically, this program uses regular expressions to find the information.
 The output files, **out_1.txt**, **out_2.txt**, and **out_3.txt** contain a pair for each processed file; its first component is the name of the .out file and the second component is:
 
-
- * -2 is TIMEOUT 
- * -1 is UNSATISFIABLE 
+ * -2 represents TIMEOUT 
+ * -1 represents UNSATISFIABLE 
  * A value >= 0 corresponds to the makespan 
 
-This process may take some time to complete.
-
+Please note that this process may take a significant amount of time.
 
 ### 3. Program that produces input files for the main program.
 
@@ -62,7 +60,7 @@ This process may take some time to complete.
 
 ### 4. The main program.
 
-**V9_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and, generates all files with the 'V9_' prefix and 'csv' extension. Specifically, this program generates the file **V9_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V9_process_MRs_log.txt**.
+**V9_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and, generates all files with the 'V9_' prefix. Specifically, this program generates the file **V9_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V9_process_MRs_log.txt**.
 
 
 
@@ -81,7 +79,7 @@ with the data (dzn), originals and follow-ups.
 
     * **V9_killed_different_outputs.csv**: Detailed matrix of the process comparing the result of the original model with the mutated model.
 
-    * **V9_killed_MRx.csv** with 1 <= x <= 8: Detailed matrices show the results of applying the different MRs (1 means dead or alive).
+    * **V9_killed_MRx.csv** with 1 <= x <= 8: Detailed matrices show the results of applying the different MRs.
 
     * **V9_process_MRs_log.txt**: Process log.
 
