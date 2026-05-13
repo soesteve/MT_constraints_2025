@@ -22,8 +22,8 @@ The output files, **out_1.txt**, **out_2.txt**, and **out_3.txt** contain a pair
 using namespace std;
 
 
-const string folder_in = "../out_3/";
-const string file_out = "../out_3.txt";
+const string folder_in = "out";
+const string file_out = "out.txt";
 
 
 int procesar_fichero(const string& ruta);
@@ -86,7 +86,7 @@ int procesar_fichero(const string& ruta) {
 		cout << "File " << ruta << " not found." << endl;
         return -2;
     }
-        
+
 
     string linea;
     bool tiene_respuesta = false;
@@ -99,12 +99,12 @@ int procesar_fichero(const string& ruta) {
 
     // regex normal("makespan\\s*=\\s*(\\d+)");  is similar to:
     // regex raw(R"(makespan\s*=\s*(\d+))");
-	// `\s * `     Zero or more whitespace characters (spaces, tabs, etc.)              
+	// `\s * `     Zero or more whitespace characters (spaces, tabs, etc.)
 	// `=`         the equal sign itself
 	// `(\d + )`   A capture group: one or more digits (i.e., a positive integer). Captures the makespan number following the equal sign.
 
     regex patron_makespan(R"(makespan\s*=\s*(\d+))");
-    
+
     // smatch is a type alias (typedef) for std::match_results<std::string::const_iterator>
     // It is used when working with std::string and regular expressions (std::regex).
     // match is used to store the results of the search with regex_search.
@@ -122,7 +122,7 @@ int procesar_fichero(const string& ruta) {
         if (linea.find("=====UNSATISFIABLE=====") != string::npos) {
             contiene_UNSAT = true;
         }
-        // regex_search(...) Searches (not necessarily at the beginning) 
+        // regex_search(...) Searches (not necessarily at the beginning)
         // a part of the text that matches a regular expression.
         if (regex_search(linea, match, patron_makespan)) {
             ultimo_makespan = stoi(match[1]);   // stoi(...) converts that string to an integer
@@ -188,6 +188,3 @@ int search_makespan(const string name_in) {
     file_in.close();
     return makespan;
 }
-
-
-

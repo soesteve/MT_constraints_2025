@@ -2,214 +2,195 @@
 # Mutation testing and metamorphic testing for MiniZinc scheduling problems.
 
 
-## This section details the C++ source code contained in the **Project_MT_c++** folder.
+## 1. Generation of follow_ups files.
+The program to generate the follow ups of the metamorphic rules are in
+the folder `follow_ups`.
 
-### 1. Generation of follow_ups files. 
+The programs to generate the follow ups files are in the folder
+`follow_ups`. For each metamorphic rule MRx (1<=x<=8) there is
+a file called `GEN_FU_MRx.cpp`.  The programs do not have special
+requirements, just a standard c++ compiler (for instance g++) and the
+`makefile` utilities. They have been tested in Windows and Linux. They
+can be compiled with
 
-The generation of the different follow_ups files is done with the **GEN_FU_MRx.cpp** programs, with 1 <= x <= 8. The new dzn files have the same name as the original (J30_\*\_*) followed by \_fu\_ and a description of the corresponding MR. All these files have the dzn extension. 
+```
+make GEN_FU_MRx
+```
 
-``` 
-Original
-     benchmarks\data\data_psplib\j30\ J30_*_*.dzn  
-Follow-ups
-     benchmarks\data\data_psplib_follow_ups\MR1\ J30_*_*_fu_all_prec.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR2\ J30_*_*_fu_cycle.dzn   
-     benchmarks\data\data_psplib_follow_ups\MR3\ J30_*_*_fu_d.dzn   
-     benchmarks\data\data_psplib_follow_ups\MR4\ J30_*_*_fu_rc_1.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR5\ J30_*_*_ fu_1_rc_mayor_rr.dzn 
-     benchmarks\data\data_psplib_follow_ups\MR6\ J30_*_*_ fu_rc_and_rr_0.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR7\ J30_*_* _fu_rr_max.dzn  
-     benchmarks\data\data_psplib_follow_ups\DUR_0\ J30_*_*_fu_dur_0.dzn  
+and executed with
+
+```
+./GEN_FU_MRx
+```
+
+These programs take the original RCPSP data from the folder
+
+```
+benchmarks/data/data_psplib/j30/J30_*_*.dzn
+```
+
+and  generate the files in the folder `benchmarks/data/data_psplib_follow_ups/MRx`
+
+
+
+
+
+An generate the data corresponding to the metamorphic rules in the
+corresponding folders
+
+```
+benchmarks/data/data_psplib_follow_ups/MR1/J30_*_*_fu_all_prec.dzn
+benchmarks/data/data_psplib_follow_ups/MR2/J30_*_*_fu_cycle.dzn
+benchmarks/data/data_psplib_follow_ups/MR3/J30_*_*_fu_d.dzn
+benchmarks/data/data_psplib_follow_ups/MR4/J30_*_*_fu_rc_1.dzn
+benchmarks/data/data_psplib_follow_ups/MR5/J30_*_*_ fu_1_rc_mayor_rr.dzn
+benchmarks/data/data_psplib_follow_ups/MR6/J30_*_*_ fu_rc_and_rr_0.dzn
+benchmarks/data/data_psplib_follow_ups/MR7/J30_*_* _fu_rr_max.dzn
+benchmarks/data/data_psplib_follow_ups/DUR_0/J30_*_*_fu_dur_0.dzn
+```
+
+## 2. Mutant generation
+
+The original RCPSP problem is in the folder
+
+```
+benchmarks/models/rcpsp.mzn
+```
+
+To generate the mutants we must execute a the program `gen_mutants.py`
+that is located in the benchmark folder
+
+```
+cd benchmarks
+python gen_mutants.py --original ./models/rcpsp.mzn --output-dir Mutants
+```
+
+This program does not require any external dependency. It needs python 3.x.
+
+## 3. Mutant execution
+
+We first generate two files MODELS.txt and DATA.txt with the models we
+want to execute (the original RCPSP and its mutants) and the DATA
+files (the original J30 data with the follow ups).
+
+There is a program called `launcher.py` that controls all the
+executions in parallel. It hash the obvious dependency of minizic.
+
+One can execute the program with
+
+```
+python launcher.py
+```
+
+If minizinc installed in other location or the files MODELS.txt and
+DATA.txt are named differently, we can pass the options at the command
+line
+
+```
+$ python launcher.py -h
+usage: launcher.py [-h] [--model_file MODEL_FILE] [--data_file DATA_FILE] [--minizinc MINIZINC]
+
+Run minizinc tests
+
+options:
+  -h, --help            show this help message and exit
+  --model_file MODEL_FILE
+                        file with list of minizinc models
+  --data_file DATA_FILE
+                        file with list of data files
+  --minizinc MINIZINC   path to minizinc executable
+```
+
+The results of the execution is stored in the `out` directory as txt
+files with name `model--data.out`. for instance
+`rcpsp.mzn--J30_9_9_fu_rc_4.dzn.out` indicates the execution of the
+original model of RCPSP `rcpsp.mzn` with the data file `J30_9_9_fu_rc_4.dzn`.
+
+
+
+## 2. Calculate the raw results
+
+To calculate the results of the analysis we need some programs located
+at the `calc_result` folder.
+
+The program `results` reads the results in the `out` folder and
+generates a file `out.txt`.
+The  executable `results` is generated with
+
+```
+make results
+```
+
+The we can execute it with the command
+
+```
+./results
+```
+
+Then we need a precalculation of some results to make the analysis, we
+need the program `pre_mr1` which can be compiled with
+
+```
+make pre_pr1
+```
+
+and execute it
+
+```
+./pre_mr1
+```
+
+Finally the program `V9_PROCESS_MRs.cpp` that calculate the csv files
+with the details of which mutants are killed:
+
+   * `V9_mutants_killed.csv`: Summary file of the mutants killed by
+     two processes. The first process is represented by the first
+     column and compares the result of the original model with the
+     mutated model. The other columns show the results of applying the
+     different MRs (1 means killed and/or alive). This information is
+     obtained from the files shown below.
+
+   * `V9_killed_different_outputs.csv`: Detailed matrix of the
+      process comparing the result of the original model with the
+      mutated model.
+
+   * `V9_killed_MRx.csv` with 1 <= x <= 8: Detailed matrices show the
+      results of applying the different MRs.
+
+
+This program is compiled with
+
+```
+make V9_PROCESS_MR
+```
+
+and executed with
+
+```
+./V9_PROCESS_MR
 ```
 
 
-### 2. Optimization process.
+## 3. Subsuming calculation
 
-The program **results.cpp** performs an optimization process. 
+By Antonio.
 
-First, let's clarify that the output of a program (e.g., mut-A2DV-1.mnz) running on specific data (e.g., J30_1_1.dzn) is stored in an .out file (mut-A2DV-1.mzn--J30_1_1.dzn.out).
-Then, the **results.cpp** code processes the answers (.out) contained in the "out_1", "out_2", and "out_3" folders to extract the *makespan* value or *TIMEOUT* or *UNSATISFIABLE*. Specifically, this program uses regular expressions to find the information.
-The output files, **out_1.txt**, **out_2.txt**, and **out_3.txt** contain a pair for each processed file; its first component is the name of the .out file and the second component is:
-
- * -2 represents TIMEOUT 
- * -1 represents UNSATISFIABLE 
- * A value >= 0 corresponds to the makespan 
-
-Please note that this process may take a significant amount of time.
-
-### 3. Program that produces input files for the main program.
-
-
-**GEN_SUM_and_GREATER_DURATIONS.cpp**: This program processes the following files to obtain, for each file, the sum of the durations of the tasks and the longest-lasting task.
-
-``` 
-     benchmarks\data\data_psplib\j30\ J30_*_*.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR1\ J30_*_*_fu_all_prec.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR2\ J30_*_*_fu_cycle.dzn   
-     benchmarks\data\data_psplib_follow_ups\MR3\ J30_*_*_fu_d.dzn   
-     benchmarks\data\data_psplib_follow_ups\MR4\ J30_*_*_fu_rc_1.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR5\ J30_*_*_ fu_1_rc_mayor_rr.dzn 
-     benchmarks\data\data_psplib_follow_ups\MR6\ J30_*_*_ fu_rc_and_rr_0.dzn  
-     benchmarks\data\data_psplib_follow_ups\MR7\ J30_*_* _fu_rr_max.dzn  
-     benchmarks\data\data_psplib_follow_ups\DUR_0\ J30_*_*_fu_dur_0.dzn  
-```
-
-
-
-
-
-### 4. The main program.
-
-**V9_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and, generates all files with the 'V9_' prefix. Specifically, this program generates the file **V9_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V9_process_MRs_log.txt**.
-
-
-
-* Input files of **V9_PROCESS_MRs.cpp**:
-
-   * **sum_durations.txt**: It contains the sum of the durations of all the tasks in each dzn file.
-
-   * **longer_durations.txt**: It contains the longest duration of all tasks in each dzn file. 
-
-   * **out_1.txt**, **out_2.txt** and **out_3.txt**: These files contain the different makespans obtained from running the Minizinc (mzn) programs, model and mutants,
-with the data (dzn), originals and follow-ups.
-
-* Output files of **V9_PROCESS_MRs.cpp**:
-
-   * **V9_mutants_killed.csv**: Summary file of the mutants killed by two processes. The first process is represented by the first column and compares the result of the original model with the mutated model. The other columns show the results of applying the different MRs (1 means killed and/or alive). This information is obtained from the files shown below.
-
-    * **V9_killed_different_outputs.csv**: Detailed matrix of the process comparing the result of the original model with the mutated model.
-
-    * **V9_killed_MRx.csv** with 1 <= x <= 8: Detailed matrices show the results of applying the different MRs.
-
-    * **V9_process_MRs_log.txt**: Process log.
-
-
-
-
-
-
-## 5. Distribution of the **benchmarks** folder:
-
-
+## 4. Distribution of the repository:
 
 ```
++ README.md  ......................... This file
++ launcher.py  ....................... Program to perform the all the executions of model and data
++ (01*-06*).py ....................... Programs to subsuming calculation
++ run_all.sh  ........................ Script to launch all subsuming calculations
++ follow_ups ......................... Source programs to generate the follow ups
++ calc_results   ..................... Source programs to generate the csv files
 + benchmarks
+|--+ gen_mutants.py .................. Program to generate the mutants
 |--+ data
-|--|--+ data_psplib
-|--|--|--+ j30
-|--|--|--|--+ J30_1_1.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10.dzn
-|--|--+ data_psplib_follow_ups
-|--|--|--+ MR1
-|--|--|--|--+ J30_1_1_fu_all_prec.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_all_prec.dzn
-|--|--|--+ MR2
-|--|--|--|--+ J30_1_1_fu_cycle.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_cycle.dzn
-|--|--|--+ MR3
-|--|--|--|--+ J30_1_1_fu_d.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_d.dzn
-|--|--|--+ MR4
-|--|--|--|--+ J30_1_1_fu_rc_1.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_rc_1.dzn
-|--|--|--+ MR5
-|--|--|--|--+ J30_1_1_fu_rc_mayor_rr.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_rc_mayor_rr.dzn
-|--|--|--+ MR6
-|--|--|--|--+ J30_1_1_fu_rc_and_rr_0.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_rc_and_rr_0.dzn
-|--|--|--+ MR7
-|--|--|--|--+ J30_1_1_fu_rr_max.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_rr_max.dzn
-|--|--|--+ MR8
-|--|--|--|--+ J30_1_1_fu_dur_0.dzn
-|--|--|--|--+ ...
-|--|--|--|--+ J30_48_10_fu_dur_0.dzn
+|--|--+ data_psplib   ................ original J30 data
+|--|--+ data_psplib_follow_ups ....... follow ups of the metamorphic rules
 |--+ models
-|--|--+ rcpsp.mzn
-|--+ Mutants
-|--|--+ mut-LE2NE-4.mzn
-|--|--+ mut-LE2GE-4.mzn
-|--|--+ mut-LT2NE-1.mzn
-|--|--+ mut-A2M-4.mzn
-|--|--+ mut-LE2GE-1.mzn
-|--|--+ mut-A2S-5.mzn
-|--|--+ mut-LE2LT-1.mzn
-|--|--+ mut-GT2LT-1.mzn
-|--|--+ mut-GT2NE-4.mzn
-|--|--+ mut-A2DV-4.mzn
-|--|--+ mut-GT2LT-4.mzn
-|--|--+ mut-A2S-2.mzn
-|--|--+ mut-A2DV-2.mzn
-|--|--+ mut-EQ2LE-1.mzn
-|--|--+ mut-S2M-1.mzn
-|--|--+ mut-LE2LT-4.mzn
-|--|--+ mut-LE2GT-4.mzn
-|--|--+ mut-S2A-1.mzn
-|--|--+ mut-GT2LT-2.mzn
-|--|--+ mut-LE2EQ-3.mzn
-|--|--+ mut-LE2GE-2.mzn
-|--|--+ mut-GT2LE-2.mzn
-|--|--+ mut-LE2GT-2.mzn
-|--|--+ mut-GT2LE-4.mzn
-|--|--+ mut-A2DV-1.mzn
-|--|--+ mut-LE2EQ-4.mzn
-|--|--+ mut-GT2EQ-2.mzn
-|--|--+ mut-LE2NE-3.mzn
-|--|--+ mut-F2E-1.mzn
-|--|--+ mut-A2M-2.mzn
-|--|--+ mut-GT2EQ-3.mzn
-|--|--+ mut-LT2EQ-1.mzn
-|--|--+ mut-LE2GE-3.mzn
-|--|--+ mut-C2D-2.mzn
-|--|--+ mut-EQ2GT-1.mzn
-|--|--+ mut-A2S-4.mzn
-|--|--+ mut-LE2GT-3.mzn
-|--|--+ mut-NE2GT-1.mzn
-|--|--+ mut-D2C-1.mzn
-|--|--+ mut-F2E-3.mzn
-|--|--+ mut-LE2LT-2.mzn
-|--|--+ mut-A2M-5.mzn
-|--|--+ mut-C2D-1.mzn
-|--|--+ mut-A2S-3.mzn
-|--|--+ mut-LE2GT-1.mzn
-|--|--+ mut-GT2NE-1.mzn
-|--|--+ mut-NE2EQ-1.mzn
-|--|--+ mut-EQ2NE-1.mzn
-|--|--+ mut-GT2EQ-4.mzn
-|--|--+ mut-GT2EQ-1.mzn
-|--|--+ mut-F2E-2.mzn
-|--|--+ mut-E2F-1.mzn
-|--|--+ mut-A2S-1.mzn
-|--|--+ mut-LE2EQ-1.mzn
-|--|--+ mut-LT2GT-1.mzn
-|--|--+ mut-CSWAP-1.mzn
-|--|--+ mut-A2DV-5.mzn
-|--|--+ mut-A2DV-3.mzn
-|--|--+ mut-NE2LE-1.mzn
-|--|--+ mut-GT2LE-3.mzn
-|--|--+ mut-GT2LE-1.mzn
-|--|--+ mut-GT2LT-3.mzn
-|--|--+ mut-NE2LT-1.mzn
-|--|--+ mut-LE2NE-2.mzn
-|--|--+ mut-LE2EQ-2.mzn
-|--|--+ mut-LT2GE-1.mzn
-|--|--+ mut-LE2NE-1.mzn
-|--|--+ mut-GT2NE-3.mzn
-|--|--+ mut-EQ2LT-1.mzn
-|--|--+ mut-A2M-3.mzn
-|--|--+ mut-S2DV-1.mzn
-|--|--+ mut-LE2LT-3.mzn
-|--|--+ mut-GT2NE-2.mzn
-|--|--+ mut-A2M-1.mzn
-|--|--+ mut-LT2LE-1.mzn
-|--|--+ mut-F2E-4.mzn
-```
+|--|--+ rcpsp.mzn .................... Original RCPSP model
+|--+ Mutants ......................... Generated mutants
++ out  ............................... Folder of the result of the execution of models and data
++ out.txt ............................ Summary of the results of folder out
