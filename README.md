@@ -74,7 +74,7 @@ want to execute (the original RCPSP and its mutants) and the DATA
 files (the original J30 data with the follow ups).
 
 There is a program called `launcher.py` that controls all the
-executions in parallel. It hash the obvious dependency of minizic.
+executions in parallel. It has the obvious dependency of minizinc.
 
 One can execute the program with
 
@@ -131,7 +131,7 @@ Then we need a precalculation of some results to make the analysis, we
 need the program `pre_mr1` which can be compiled with
 
 ```
-make pre_pr1
+make pre_mr1
 ```
 
 and execute it
@@ -140,7 +140,7 @@ and execute it
 ./pre_mr1
 ```
 
-Finally the program `V9_PROCESS_MRs.cpp` that calculate the csv files
+The program `V9_PROCESS_MRs.cpp` that calculate the csv files
 with the details of which mutants are killed:
 
    * `V9_mutants_killed.csv`: Summary file of the mutants killed by
@@ -168,6 +168,21 @@ and executed with
 
 ```
 ./V9_PROCESS_MR
+```
+
+Finally, the program `classByConstr.cpp` shows varying detection effectiveness across metamorphic rules and constraint classifications, as reported in the file `classByConstr.csv`.
+
+
+This program is compiled with
+
+```
+make classByConstr
+```
+
+and executed with
+
+```
+./classByConstr
 ```
 
 
