@@ -1,0 +1,6 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR5/j30/J30_48_4_fu_1_rc_mayor_rr.dzn benchmarks/Mutants/mut-EQ2LE-1.mzn
+Warning: file "mut-EQ2LE-1.mzn" included from library, but also exists in current working directory.
+
+TIMEOUT
+total time: 30.000864000059664 ms
+OK

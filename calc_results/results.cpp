@@ -22,8 +22,8 @@ The output files, **out_1.txt**, **out_2.txt**, and **out_3.txt** contain a pair
 using namespace std;
 
 
-const string folder_in = "out";
-const string file_out = "out.txt";
+const string folder_in = "../out";
+const string file_out = "../out.txt";
 
 
 int procesar_fichero(const string& ruta);

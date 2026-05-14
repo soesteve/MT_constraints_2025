@@ -1,15 +1,16 @@
-import os
-import os.path
 import re
 import subprocess, shlex
 import datetime
 import sys
 from multiprocessing import Pool
 import time
+import argparse
+from pathlib import Path
+import os
 
 TIMEOUT=30
-MINIZINC='/opt/minizinc/current/bin/minizinc'
-OUTDIR = 'out'
+# MINIZINC='/opt/minizinc/current/bin/minizinc'
+OUTDIR = Path('out')
 
 def log(comment):
     now = datetime.datetime.now()
@@ -49,19 +50,20 @@ def need_testing(filename):
     return nt
 
 def execute_test(params):
-    model, data = params
+    minizinc, model, data = params
     basemodel = os.path.basename(model).strip()
     basedata = os.path.basename(data).strip()
     print(f'processsing {basemodel}--{basedata}')
-    outfile = f'{OUTDIR}/{basemodel}--{basedata}.out'
+
+    outfile = OUTDIR / f'{basemodel}--{basedata}.out'
     if need_testing(outfile):
         with open(outfile, 'w' ) as out:
-            execute_command(f'{MINIZINC} {data.strip()} {model.strip()}', out, out)
+            execute_command(f'{minizinc} {data.strip()} {model.strip()}', out, out)
             out.write(f'OK\n')
     else:
         print('already run')
 
-def main(model_file, data_file):
+def main(minizinc, model_file, data_file):
     with open(data_file) as dfile:
         datalst = dfile.readlines()
     with open(model_file) as mfile:
@@ -69,7 +71,7 @@ def main(model_file, data_file):
 
     with Pool() as pool:
         pool.map(execute_test,
-                 [(model, data)
+                 [(minizinc, model, data)
                   for model in modellst for data in datalst])
 
 
@@ -81,11 +83,19 @@ def g(t):
     sum(*t)
 
 if __name__ == '__main__':
-    if len(sys.argv)<2:
-        print(f'usage: python3 {sys.argv[0]} model_file data_file')
-        sys.exit(1)
-    model_file = sys.argv[1]
-    data_file = sys.argv[2]
+    argp = argparse.ArgumentParser(description='Run minizinc tests')
+    argp.add_argument('--model_file', type=str,
+                     default='MODELS.txt',
+                     help='file with list of minizinc models')
+    argp.add_argument('--data_file', type=str,
+                     default='DATA.txt',
+                     help='file with list of data files')
 
+    argp.add_argument('--minizinc', type=str,
+                     default='/opt/minizinc/current/bin/minizinc',
+                     help='path to minizinc executable')
+    arg = argp.parse_args()
+
+    OUTDIR.mkdir()
     with open('tests.log', 'w') as LOG:
-        main(model_file, data_file)
+        main(arg.minizinc, arg.model_file, arg.data_file)

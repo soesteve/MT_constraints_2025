@@ -1,5 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR6/j30/J30_18_10_fu_rc_and_rr_0.dzn benchmarks/Mutants/mut-LE2EQ-1.mzn
-=====UNSATISFIABLE=====
-OK
-total time: 0.16450328473001719 ms
-OK
