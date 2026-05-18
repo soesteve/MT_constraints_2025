@@ -1,16 +1,15 @@
 #!/bin/bash
 
-#set -e
+set -e
 
 # Generates all the YAML fields from using Papadakis' algorithm
 # to detect subsuming mutants.
 
-# if ! test -d .venv; then
-#   virtualenv .venv
-# fi
-# source .venv/bin/activate
-# pip install -r requirements.txt
-
+if ! test -d .venv; then
+  virtualenv .venv
+fi
+source .venv/bin/activate
+pip install -r requirements.txt
 
 VERSION=$1
 
@@ -31,7 +30,7 @@ python 01-subsumption.py ${VERSION}_killed_*.csv --output ${VERSION}_killed_all.
 # considering one of each set of duplicated mutants (30 samples)
 mkdir -p sample-duplicated
 for i in `seq -w 1 30`; do
-  echo "Procession step $i"
+  echo "Computing subsumed mutants with sampling - step $i"
   OUTPUT="sample-duplicated/$i-subsumed.yaml"
   python 01-subsumption.py ${VERSION}_killed_*.csv --sample-duplicated --output "$OUTPUT"
   python 02-operators.py "$OUTPUT" --output "sample-duplicated/$i-stats.csv"

@@ -7,7 +7,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(
         prog=os.path.basename(__file__),
-        description='Lists the subsuming mutants in a V8*.yaml file'
+        description='Lists the subsuming mutants in a V9*.yaml file'
     )
     parser.add_argument('yaml_path')
     args = parser.parse_args()
