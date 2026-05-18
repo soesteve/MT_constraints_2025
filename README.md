@@ -2,7 +2,7 @@
 # Mutation testing and metamorphic testing for MiniZinc scheduling problems
 
 
-## Step 1 - Generation of follow_ups files
+## Step 1 - generation of follow_ups files
 
 The program to generate the follow ups of the metamorphic rules are in
 the folder `follow_ups`.
@@ -50,7 +50,7 @@ benchmarks/data/data_psplib_follow_ups/MR7/J30_*_* _fu_rr_max.dzn
 benchmarks/data/data_psplib_follow_ups/DUR_0/J30_*_*_fu_dur_0.dzn
 ```
 
-## 2. Mutant generation
+## Step 2 - mutant generation
 
 The original RCPSP problem is in the folder
 
@@ -68,7 +68,7 @@ python gen_mutants.py --original ./models/rcpsp.mzn --output-dir Mutants
 
 This program does not require any external dependency. It needs python 3.x.
 
-## 3. Mutant execution
+## Step 3 - mutant execution
 
 We first generate two files MODELS.txt and DATA.txt with the models we
 want to execute (the original RCPSP and its mutants) and the DATA
@@ -109,7 +109,7 @@ original model of RCPSP `rcpsp.mzn` with the data file `J30_9_9_fu_rc_4.dzn`.
 
 
 
-## Step 2 - Calculate the raw results
+## Step 4 - calculate the raw results
 
 To calculate the results of the analysis we need some programs located
 at the `calc_result` folder.
@@ -187,7 +187,7 @@ and executed with
 ```
 
 
-## Step 3 - subsuming mutants calculation
+## Step 5 - subsuming mutants calculation
 
 The repository includes a set of scripts to find the set of subsuming mutants, using the algorithm by [Papadakis et al.](https://doi.org/10.1145/2931037.2931040), both in its original form, and in a modified form that samples among duplicated mutants.
 
