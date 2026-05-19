@@ -1,0 +1,19 @@
+\begin{tabular}{lrrrr}
+    \toprule
+    Operator & \rotatebox{90}{Alive} & \rotatebox{90}{Duplicated} & \rotatebox{90}{Subsumed} & \rotatebox{90}{Subsuming} \\
+    {% for opfamily in opsets %}
+    \midrule
+    % family start
+      {% for oprow in opfamily %}
+      % row start
+        {% for op in oprow %}
+            {% if op in data.keys() %}
+            {{ op }} & {{ data.get(op)['alive'] }} & {{ data.get(op)['duplicated']}} & {{ data.get(op)['subsumed'] }} & {{ data.get(op)['subsuming'] }} \\
+            {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% endfor %}
+    \midrule
+    \textbf{Total} & {{ totals.get('alive') }} & {{ totals.get('duplicated') }} & {{ totals.get('subsumed') }} & {{ totals.get('subsuming') }} \\
+    \bottomrule
+\end{tabular}
