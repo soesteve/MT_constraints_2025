@@ -1,6 +1,0 @@
-/opt/minizinc/current/bin/minizinc ./benchmarks/data/data_psplib_follow_ups/MR5_2/j30/J30_42_2_fu_rc_mayor_rr.dzn benchmarks/Mutants/mut-C2D-2.mzn
-Warning: file "mut-C2D-2.mzn" included from library, but also exists in current working directory.
-
-TIMEOUT
-total time: 30.00115467235446 ms
-OK

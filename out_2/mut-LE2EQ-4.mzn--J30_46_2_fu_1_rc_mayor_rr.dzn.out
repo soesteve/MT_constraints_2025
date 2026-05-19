@@ -1,4 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR5/j30/J30_46_2_fu_1_rc_mayor_rr.dzn benchmarks/Mutants/mut-LE2EQ-4.mzn
-TIMEOUT
-total time: 30.002202097326517 ms
-OK

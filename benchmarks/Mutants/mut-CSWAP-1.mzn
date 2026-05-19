@@ -85,10 +85,10 @@ constraint
             if RTasks != {} /\ sum_rr > rc[r] then
                 cumulative(
                     [ s[i] | i in RTasks ],
-                    [ rr[r, i] | i in RTasks ],
                     [ d[i] | i in RTasks ],
                     rc[r]
-                )
+                ,
+                    [ rr[r, i] | i in RTasks ])
             else
                 true
             endif

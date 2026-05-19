@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc ./benchmarks/data/data_psplib_follow_ups/MR5_2/j30/J30_35_2_fu_rc_mayor_rr.dzn benchmarks/Mutants/mut-LE2LT-3.mzn
-Start times = [0, 2, 0, 15, 1, 10, 20, 25, 15, 6, 7, 20, 25, 27, 25, 26, 33, 30, 39, 39, 46, 39, 40, 33, 46, 46, 39, 53, 56, 56]
-makespan = 63
-----------
-==========
-OK
-total time: 0.16396563313901424 ms
-OK

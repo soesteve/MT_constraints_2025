@@ -1,0 +1,4 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR7/j30/J30_46_9_fu_rr_max.dzn benchmarks/Mutants/mut-CSWAP-1.mzn
+TIMEOUT
+total time: 30.000797145068645 ms
+OK

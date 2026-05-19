@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR5/j30/J30_10_10_fu_1_rc_mayor_rr.dzn benchmarks/Mutants/mut-A2DV-5.mzn
-Start times = [0, 7, 0, 16, 44, 53, 17, 16, 61, 20, 34, 7, 26, 53, 1, 71, 17, 16, 80, 90, 53, 20, 29, 34, 95, 24, 100, 34, 71, 102]
-makespan = 17
-----------
-==========
-OK
-total time: 0.231006002984941 ms
-OK

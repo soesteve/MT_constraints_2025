@@ -1,0 +1,190 @@
+﻿/*
+The program **results.cpp** performs an optimization process.
+
+First, let's clarify that the output of a program (e.g., mut-A2DV-1.mnz) running on specific data (e.g., J30_1_1.dzn) is stored in an .out file (mut-A2DV-1.mzn--J30_1_1.dzn.out).
+Then, the **results.cpp** code processes the answers (.out) contained in the "out_1", "out_2", and "out_3" folders to extract the *makespan* values (or the "TIMEOUT" and "UNSATISFIABLE"). Specifically, this program uses regular expressions to find the information.
+The output files, **out_1.txt**, **out_2.txt**, and **out_3.txt** contain a pair for each processed file; its first component is the name of the .out file and the second component is:
+
+
+ * -2 is TIMEOUT or not finished, does not have OK
+ * -1 is UNSATISFIABLE
+ * A value >= 0 corresponds to the makespan
+*/
+
+
+#include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <string>
+#include <vector>
+#include <regex>
+#include <algorithm>
+using namespace std;
+
+
+const string folder_in = "../out";
+const string file_out = "../out.txt";
+
+
+int procesar_fichero(const string& ruta);
+int search_makespan(const string name_in);
+
+
+
+int main() {
+
+    ofstream salida(file_out); // output file
+
+    if (!salida.is_open()) {
+        cerr << "Error opening output file.\n";
+        return 1;
+    }
+
+
+    vector<filesystem::directory_entry> ficheros;
+
+    try {
+        for (const auto& entry : filesystem::directory_iterator(folder_in)) {
+            if (entry.is_regular_file()) {
+                ficheros.push_back(entry);
+            }
+        }
+
+        // Alphabetical order by file name
+        sort(ficheros.begin(), ficheros.end(), [](const filesystem::directory_entry& a, const filesystem::directory_entry& b) {
+            return a.path().filename().string() < b.path().filename().string();
+            });
+
+        for (const auto& entry : ficheros) {
+            string nombre = entry.path().filename().string();
+            string ruta_completa = entry.path().string();
+
+            int resultado = procesar_fichero(ruta_completa);  // file   .txt
+
+            salida << nombre << ' ' << resultado << '\n';
+        }
+
+    }
+    catch (const exception& e) {
+        cerr << "Error processing file: " << e.what() << '\n';
+        return 1;
+    }
+
+    salida.close();
+    cout << "Process completed.\n";
+	system("pause");
+    return 0;
+}
+
+
+
+
+
+int procesar_fichero(const string& ruta) {
+    ifstream fichero(ruta);
+    if (!fichero.is_open()) {
+		cout << "File " << ruta << " not found." << endl;
+        return -2;
+    }
+
+
+    string linea;
+    bool tiene_respuesta = false;
+    bool contiene_TIMEOUT = false;
+    bool contiene_UNSAT = false;
+    int ultimo_makespan = -7;
+
+	// Regular expression to detect lines containing something like: makespan = 123
+    // R"( ... )" is a raw string in C++: it allows you to write regular expressions without having to double backslashes (\\) or escape quotes and other special characters.
+
+    // regex normal("makespan\\s*=\\s*(\\d+)");  is similar to:
+    // regex raw(R"(makespan\s*=\s*(\d+))");
+	// `\s * `     Zero or more whitespace characters (spaces, tabs, etc.)
+	// `=`         the equal sign itself
+	// `(\d + )`   A capture group: one or more digits (i.e., a positive integer). Captures the makespan number following the equal sign.
+
+    regex patron_makespan(R"(makespan\s*=\s*(\d+))");
+
+    // smatch is a type alias (typedef) for std::match_results<std::string::const_iterator>
+    // It is used when working with std::string and regular expressions (std::regex).
+    // match is used to store the results of the search with regex_search.
+    // match[0] will contain the entire match.
+    // match[1] will contain the makespan number (captured by (\d+)).
+    smatch match;
+
+    while (getline(fichero, linea)) {
+        if (linea.find("==========") != string::npos) {
+            tiene_respuesta = true;
+        }
+        if (linea.find("TIMEOUT") != string::npos) {
+            contiene_TIMEOUT = true;
+        }
+        if (linea.find("=====UNSATISFIABLE=====") != string::npos) {
+            contiene_UNSAT = true;
+        }
+        // regex_search(...) Searches (not necessarily at the beginning)
+        // a part of the text that matches a regular expression.
+        if (regex_search(linea, match, patron_makespan)) {
+            ultimo_makespan = stoi(match[1]);   // stoi(...) converts that string to an integer
+        }
+    }
+
+    fichero.close();
+
+    if (contiene_TIMEOUT) return -2;
+    if (contiene_UNSAT) return -1;
+    if (!tiene_respuesta) return -2;
+    return ultimo_makespan;
+}
+
+
+
+// search_makespan returns:
+// -2 is TIMEOUT or not finished, does not have OK
+// -1 is UNSATISFIABLE
+// a value >= 0 corresponds to the makespan
+
+int search_makespan(const string name_in) {
+    int makespan = -7;
+
+    ifstream file_in(name_in);
+
+    string s;
+    getline(file_in, s);
+
+    if (!file_in) {
+        cout << "File " << name_in << " not found." << endl;
+        return -8;
+    }
+
+    bool encontrado = false;
+    while (file_in && !encontrado) {
+        if (s.rfind("TIMEOUT", 0) == 0) {
+            makespan = -2;
+            encontrado = true;
+        }
+        if (s.rfind("makespan", 0) == 0) {
+
+            // Using iterators and regular expressions
+            // Working with regular expressions to remove = ; [ ]
+            regex word_regex("(\\w+)");
+
+            sregex_iterator i = sregex_iterator(s.begin(), s.end(), word_regex);
+
+            // Advance the iterator by 1 because s contains something like: makespan = 167
+            // and the = is not captured by the regular expression
+            ++i;
+            smatch match = *i;
+            string match_str = match.str();
+            makespan = stoi(match_str);  // casting from string to int
+            encontrado = true;
+        }
+        if (s.rfind("=====UNSATISFIABLE=====", 0) == 0) {
+            makespan = -1;
+            encontrado = true;
+        }
+        getline(file_in, s);
+    }
+    file_in.close();
+    return makespan;
+}
