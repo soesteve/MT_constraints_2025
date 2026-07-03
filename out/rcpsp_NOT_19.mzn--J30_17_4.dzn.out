@@ -1,0 +1,15 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j30/J30_17_4.dzn benchmarks/Mutants/rcpsp_NOT_19.mzn
+Warning: model inconsistency detected: expression evaluated to false
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_19.mzn:77.5-96.5
+  in call 'forall'
+  in array comprehension expression
+    with r = 3
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_19.mzn:79.9-95.9
+  in let expression
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_19.mzn:85.13-94.17
+  in if-then-else expression
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.11373388100764714 ms
+OK

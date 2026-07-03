@@ -1,0 +1,10 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j90/J90_11_6.dzn benchmarks/Mutants/rcpsp_NOT_03.mzn
+Warning: model inconsistency detected
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_03.mzn:65.5-72.5
+  in unary 'not' operator expression
+  in call 'forall'
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.16666127699136268 ms
+OK

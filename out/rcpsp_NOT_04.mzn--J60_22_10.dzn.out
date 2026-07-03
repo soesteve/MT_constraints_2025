@@ -1,0 +1,16 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j60/J60_22_10.dzn benchmarks/Mutants/rcpsp_NOT_04.mzn
+Warning: model inconsistency detected
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_04.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = 17
+    with j = 17
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_04.mzn:67.9-71.13
+  in if-then-else expression
+/home/luis/inves/constraints/metamorphic_testing_constrints/experiments/benchmarks/Mutants/rcpsp_NOT_04.mzn:68.13-56
+  in binary '\/' operator expression
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.1638897189986892 ms
+OK
