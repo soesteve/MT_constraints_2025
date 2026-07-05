@@ -1,0 +1,7 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR7/j30/J30_19_4_fu_rr_max.dzn benchmarks/Mutants/mut-NOT-04.mzn
+Warning: model inconsistency detected
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.26622753898845986 ms
+OK

@@ -1,4 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j30/J30_41_1.dzn benchmarks/Mutants/rcpsp_NOT_19.mzn
-TIMEOUT
-total time: 30.000518197994097 ms
-OK

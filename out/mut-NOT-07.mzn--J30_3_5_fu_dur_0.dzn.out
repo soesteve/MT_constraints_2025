@@ -1,0 +1,14 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR8/j30/J30_3_5_fu_dur_0.dzn benchmarks/Mutants/mut-NOT-07.mzn
+Warning: model inconsistency detected: expression evaluated to false
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-07.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = 1
+    with j = 2
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-07.mzn:67.9-71.13
+  in if-then-else expression
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.16392708002240397 ms
+OK

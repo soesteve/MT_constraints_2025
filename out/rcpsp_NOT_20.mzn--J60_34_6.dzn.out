@@ -1,8 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j60/J60_34_6.dzn benchmarks/Mutants/rcpsp_NOT_20.mzn
-Start times = [0, 0, 0, 7, 7, 10, 7, 10, 8, 9, 18, 9, 24, 17, 12, 25, 19, 24, 34, 49, 14, 27, 2, 16, 16, 41, 27, 37, 59, 17, 34, 41, 45, 32, 27, 45, 59, 51, 16, 24, 59, 45, 51, 71, 51, 33, 34, 61, 81, 64, 60, 65, 60, 77, 71, 67, 74, 87, 76, 86]
-makespan = 0
-----------
-==========
-OK
-total time: 0.2139990739960922 ms
-OK

@@ -1,5 +1,0 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j60/J60_41_9.dzn benchmarks/Mutants/rcpsp_NOT_07.mzn
-=====UNSATISFIABLE=====
-OK
-total time: 0.2156057829997735 ms
-OK

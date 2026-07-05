@@ -1,0 +1,5 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR2/j30/J30_25_5_fu_cycle.dzn benchmarks/Mutants/mut-NOT-08.mzn
+=====UNSATISFIABLE=====
+OK
+total time: 0.1665063620021101 ms
+OK

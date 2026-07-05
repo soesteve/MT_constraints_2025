@@ -1,0 +1,10 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR1/j30/J30_47_2_fu_all_prec.dzn benchmarks/Mutants/mut-NOT-02.mzn
+Warning: model inconsistency detected
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-02.mzn:65.5-72.5
+  in unary 'not' operator expression
+  in call 'forall'
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.11394626600667834 ms
+OK
