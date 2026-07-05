@@ -90,7 +90,7 @@ constraint
                     rc[r]
                 )
             else
-                true
+                not true
             endif
         )
     );
@@ -98,7 +98,7 @@ constraint
     % Makespan constraints
     %
 constraint
-   not forall ( i in Tasks where suc[i] == {} )
+   forall ( i in Tasks where suc[i] == {} )
    (
       s[i] + d[i] <= objective
    );

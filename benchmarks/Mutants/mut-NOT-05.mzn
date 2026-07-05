@@ -83,7 +83,7 @@ constraint
             int: sum_rr = sum(i in RTasks)(rr[r, i])
         } in (
             if RTasks != {} /\ sum_rr > rc[r] then
-                cumulative(
+                not cumulative(
                     [ s[i] | i in RTasks ],
                     [ d[i] | i in RTasks ],
                     [ rr[r, i] | i in RTasks ],
@@ -98,7 +98,7 @@ constraint
     % Makespan constraints
     %
 constraint
-   not forall ( i in Tasks where suc[i] == {} )
+   forall ( i in Tasks where suc[i] == {} )
    (
       s[i] + d[i] <= objective
    );

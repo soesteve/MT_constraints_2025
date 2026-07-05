@@ -64,7 +64,7 @@ constraint
 constraint
     forall ( i, j in Tasks where i < j )
     (
-        if exists(r in Res)(rr[r, i] + rr[r, j] > rc[r]) then
+        if not exists(r in Res)(rr[r, i] + rr[r, j] > rc[r]) then
             s[i] + d[i] <= s[j]   \/ s[j] + d[j] <= s[i]
         else
             true
@@ -98,7 +98,7 @@ constraint
     % Makespan constraints
     %
 constraint
-   not forall ( i in Tasks where suc[i] == {} )
+   forall ( i in Tasks where suc[i] == {} )
    (
       s[i] + d[i] <= objective
    );
