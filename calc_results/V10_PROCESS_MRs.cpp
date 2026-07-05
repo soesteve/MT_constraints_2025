@@ -2,7 +2,8 @@
 
 **V10_PROCESS_MRs.cpp** is the main program that processes the metamorphic relations MR1, ..., MR8 and,
 generates all files with the 'V10_' prefix.
-Specifically, this program generates the file **V10_mutants_killed.csv** which shows which mutants are killed.  This program also generates the log file **V10_process_MRs_log.txt**.
+Specifically, this program generates the file **V10_mutants_killed.csv** which shows which mutants are killed.  
+This program also generates the log file **V10_process_MRs_log.txt**.
 
 
 
@@ -12,7 +13,7 @@ Specifically, this program generates the file **V10_mutants_killed.csv** which s
 
    * **longer_durations.txt**: It contains the longest duration of all tasks in each dzn file.
 
-   * **out_1.txt**, **out_2.txt** and **out_3.txt**: These files contain the different makespans obtained
+   * **out.txt**: This files contain the different makespans obtained
    from running the Minizinc (mzn) programs, model and mutants, with the data (dzn), originals and follow-ups.
 
 * Output files of **V10_PROCESS_MRs.cpp**:
@@ -49,25 +50,27 @@ const string path = "../";
 // output file path
 const string path_out = "../";
 
+const int mutants_number = 84; 
+
 struct tPaths {
 	string file[100];
 	int cont = 0;
 };
 
 struct tMatrix {
-	int value[76][12] = { 0 };
-	string name[76] = { "" };
+	int value[mutants_number][12] = { 0 };
+	string name[mutants_number] = { "" };
 	int ncol = 0;
 };
 
 
 struct tMatrix_2 {
-	std::vector<std::vector<int>> value; // int value[76][481] = { 0 };
-	std::vector<std::string> name_row;   // string name_row[76] = { "" };
+	std::vector<std::vector<int>> value; // int value[84][481] = { 0 };
+	std::vector<std::string> name_row;   // string name_row[84] = { "" };
 	std::vector<std::string> name_col;   // string name_col[481] = { "" };
 
-	tMatrix_2() : value(76, std::vector<int>(481, 0)),
-		name_row(76, ""), name_col(481, "") {}
+	tMatrix_2() : value(mutants_number, std::vector<int>(481, 0)),
+		name_row(mutants_number, ""), name_col(481, "") {}
 };
 
 
@@ -183,9 +186,12 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 
 	std::vector<std::string> file_names;
-	file_names.push_back("out_1.txt");
+/*	file_names.push_back("out_1.txt");
 	file_names.push_back("out_2.txt");
 	file_names.push_back("out_3.txt");
+	*/
+
+	file_names.push_back("out.txt");
 
 	ifstream file_results;
 	for (int i = 0; i < file_names.size(); i++) {
@@ -484,7 +490,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 
 	// Transfer the matrix to the file V10_mutants_killed.csv
 
-	for (int nrow = 0; nrow < 76; nrow++) {
+	for (int nrow = 0; nrow < mutants_number; nrow++) {
 		mutants_killed << matrix.name[nrow];
 
 		for (int ncol = 0; ncol < 10; ncol++) {
@@ -517,7 +523,7 @@ void process_all(tPaths& array_mzns, tPaths& array_dzn, tMatrix& matrix, tMatrix
 		mutants_killed_MR8 << matrix_MR8.name_col[j];
 	}
 
-	for (int nrow = 0; nrow < 76; nrow++) {
+	for (int nrow = 0; nrow < mutants_number; nrow++) {
 		mutants_killed_2 << matrix_diff.name_row[nrow];
 		mutants_killed_MR1 << matrix_MR1.name_row[nrow];
 		mutants_killed_MR2 << matrix_MR2.name_row[nrow];

@@ -74,3 +74,11 @@ mut-GT2NE-2.mzn
 mut-A2M-1.mzn
 mut-LT2LE-1.mzn
 mut-F2E-4.mzn
+mut-NOT-01.mzn
+mut-NOT-02.mzn
+mut-NOT-03.mzn
+mut-NOT-04.mzn
+mut-NOT-05.mzn
+mut-NOT-06.mzn
+mut-NOT-07.mzn
+mut-NOT-08.mzn
