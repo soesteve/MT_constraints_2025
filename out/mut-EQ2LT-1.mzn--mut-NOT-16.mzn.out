@@ -1,0 +1,6 @@
+/opt/minizinc/current/bin/minizinc benchmarks/Mutants/mut-NOT-16.mzn benchmarks/Mutants/mut-EQ2LT-1.mzn
+Error: type error: identifier `n_res' already defined
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-EQ2LT-1.mzn:28.1-10
+OK
+total time: 0.06374861701624468 ms
+OK

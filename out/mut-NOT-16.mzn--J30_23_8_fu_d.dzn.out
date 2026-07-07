@@ -1,0 +1,4 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR3/j30/J30_23_8_fu_d.dzn benchmarks/Mutants/mut-NOT-16.mzn
+TIMEOUT
+total time: 30.00313665997237 ms
+OK

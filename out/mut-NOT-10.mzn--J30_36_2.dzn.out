@@ -1,0 +1,16 @@
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib/j30/J30_36_2.dzn benchmarks/Mutants/mut-NOT-10.mzn
+Warning: model inconsistency detected
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-10.mzn:65.5-72.5
+  in call 'forall'
+  in array comprehension expression
+    with i = 12
+    with j = 12
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-10.mzn:67.9-71.13
+  in if-then-else expression
+/home/luis/inves/MT_constraints_2025/benchmarks/Mutants/mut-NOT-10.mzn:68.13-56
+  in binary '\/' operator expression
+
+=====UNSATISFIABLE=====
+OK
+total time: 0.11371519399108365 ms
+OK
