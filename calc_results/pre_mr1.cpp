@@ -1,6 +1,6 @@
-﻿// This program is part of a project that generates follow-up files for the PSPLIB benchmarks, 
-// specifically for the J30 problem set. 
-// The program calculates the sum of the durations and the greatest duration for each .dzn file, 
+﻿// This program is part of a project that generates follow-up files for the PSPLIB benchmarks,
+// specifically for the J30 problem set.
+// The program calculates the sum of the durations and the greatest duration for each .dzn file,
 // and writes the results in two separate files: sum_durations.txt and mayor_duration.txt
 
 
@@ -119,7 +119,7 @@ int main()
 
 	file_sum.close();
 	file_greater.close();
-	system("pause");
+	cout << "Program finished" << endl;
 	return 0;
 }
 
@@ -154,7 +154,7 @@ void proc_sum_dur(string path_file, string name_file, ofstream& file_sum) {
 	i = std::sregex_iterator(s.begin(), s.end(), word_regex);
 
 	// Lines are read and written directly because they do not change
-	// suc until a line that starts with suc 
+	// suc until a line that starts with suc
 
 	// Sum durations
 	int suma = 0;

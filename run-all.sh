@@ -1,15 +1,15 @@
 #!/bin/bash
 
-set -e
+# set -e
 
 # Generates all the YAML fields from using Papadakis' algorithm
 # to detect subsuming mutants.
 
-if ! test -d .venv; then
-  virtualenv .venv
-fi
-source .venv/bin/activate
-pip install -r requirements.txt
+#if ! test -d .venv; then
+#  virtualenv .venv
+#fi
+#source .venv/bin/activate
+#pip install -r requirements.txt
 
 VERSION=$1
 

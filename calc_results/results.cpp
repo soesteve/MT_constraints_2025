@@ -71,8 +71,7 @@ int main() {
     }
 
     salida.close();
-    cout << "Process completed.\n";
-	system("pause");
+    cout << "Process completed.\n"<<endl;
     return 0;
 }
 

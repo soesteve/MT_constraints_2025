@@ -165,6 +165,6 @@ int main() {
 	}
 
 
-	system("pause");
+	cout << "Program finished" << endl;
 	return 0;
 }
