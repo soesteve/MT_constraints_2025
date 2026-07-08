@@ -1,5 +1,5 @@
 /opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M4/j30/.ipynb_checkpoints/J30_1_1_fu_rc_2-checkpoint.dzn benchmarks/Mutants/mut-NOT-21.mzn
 Error: error: Cannot open data file 'benchmarks/data/data_psplib_follow_ups/M4/j30/.ipynb_checkpoints/J30_1_1_fu_rc_2-checkpoint.dzn'.
 OK
-total time: 0.11637358099687845 ms
+total time: 0.06370226002763957 ms
 OK

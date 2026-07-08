@@ -1,5 +1,5 @@
 /opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M4/j30/J30_15_2_fu_rc_4.dzn benchmarks/Mutants/mut-NOT-21.mzn
 Error: error: Cannot open data file 'benchmarks/data/data_psplib_follow_ups/M4/j30/J30_15_2_fu_rc_4.dzn'.
 OK
-total time: 0.11571890098275617 ms
+total time: 0.06564002099912614 ms
 OK
