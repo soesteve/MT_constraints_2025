@@ -138,21 +138,21 @@ need the program `pre_mr1` which can be executed with
 ./pre_mr1
 ```
 
-The program `V10_PROCESS_MRs` that calculate the csv files
+The program `V11_PROCESS_MRs` that calculate the csv files
 with the details of which mutants are killed:
 
-   * `V10_mutants_killed.csv`: Summary file of the mutants killed by
+   * `V11_mutants_killed.csv`: Summary file of the mutants killed by
      two processes. The first process is represented by the first
      column and compares the result of the original model with the
      mutated model. The other columns show the results of applying the
      different MRs (1 means killed and/or alive). This information is
      obtained from the files shown below.
 
-   * `V10_killed_different_outputs.csv`: Detailed matrix of the
+   * `V11_killed_different_outputs.csv`: Detailed matrix of the
       process comparing the result of the original model with the
       mutated model.
 
-   * `V10_killed_MRx.csv` with 1 <= x <= 8: Detailed matrices show the
+   * `V11_killed_MRx.csv` with 1 <= x <= 8: Detailed matrices show the
       results of applying the different MRs.
 
 
@@ -160,7 +160,7 @@ with the details of which mutants are killed:
 It can be executed with
 
 ```
-./V10_PROCESS_MRs
+./V11_PROCESS_MRs
 ```
 
 Finally, the program `classByConstr` shows varying detection effectiveness across metamorphic rules and constraint classifications, as reported in the file `classByConstr.csv`.
@@ -191,13 +191,13 @@ Then execute the commands
 
 ```shell
 pip install -r requirements.txt
-python 01-subsumption.py V10_killed_*.csv --output V10_killed_all.yaml
+python 01-subsumption.py V11_killed_*.csv --output V11_killed_all.yaml
 ```
 
 To use the modified algorithm (which can handle duplicated mutants via sampling), add the `--sample-duplicated` flag:
 
 ```shell
-python 01-subsumption.py V10_killed_*.csv --sample-duplicated --output V10_killed_all.yaml
+python 01-subsumption.py V11_killed_*.csv --sample-duplicated --output V11_killed_all.yaml
 ```
 
 The rest of the `NN-*.py` programs extract various reports from the computed relationships:
