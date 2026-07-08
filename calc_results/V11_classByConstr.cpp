@@ -7,7 +7,7 @@
 #include <iomanip>
 using namespace std;
 
-const int lines = 85;
+const int lines = 99;
 const int cols = 11;
 
 struct tMatrix_entrada {
@@ -31,7 +31,7 @@ unordered_set<string> set_precedences = {
 	"mut-LE2GT-1",
 	"mut-LE2LT-1",
 	"mut-LE2NE-1",
-	"mut-NOT-01.mzn"};
+	"mut-NOT-03.mzn", "mut-NOT-09.mzn" };
 unordered_set<string> set_non_overlapping = {
 	"mut-A2DV-2", "mut-A2DV-3", "mut-A2DV-4",
 	"mut-A2M-2", "mut-A2M-3", "mut-A2M-4",
@@ -46,31 +46,36 @@ unordered_set<string> set_non_overlapping = {
 	"mut-LE2LT-2", "mut-LE2LT-3",
 	"mut-LE2NE-2", "mut-LE2NE-3",
 	"mut-LT2EQ-1", "mut-LT2GE-1", "mut-LT2GT-1", "mut-LT2LE-1", "mut-LT2NE-1",
-	"mut-NOT-02.mzn", "mut-NOT-03.mzn", "mut-NOT-07.mzn" };
+	"mut-NOT-01.mzn", "mut-NOT-04.mzn", "mut-NOT-05.mzn", "mut-NOT-10.mzn",
+	"mut-NOT-11.mzn", "mut-NOT-12.mzn", "mut-NOT-13.mzn",
+	"mut-NOT-20.mzn" };
 unordered_set<string> set_cumulative = { "mut-C2D-1", "mut-C2D-2", "mut-CSWAP-1", "mut-F2E-3",
 	"mut-GT2EQ-2", "mut-GT2EQ-3", "mut-GT2EQ-4",
 	"mut-GT2LE-2", "mut-GT2LE-3", "mut-GT2LE-4",
 	"mut-GT2LT-2", "mut-GT2LT-3", "mut-GT2LT-4",
 	"mut-GT2NE-2", "mut-GT2NE-3", "mut-GT2NE-4",
 	"mut-NE2EQ-1", "mut-NE2GT-1", "mut-NE2LE-1", "mut-NE2LT-1",
-	"mut-NOT-04.mzn", "mut-NOT-05.mzn", "mut-NOT-08.mzn" };
+	"mut-NOT-02.mzn", "mut-NOT-06.mzn", "mut-NOT-07.mzn",
+	"mut-NOT-14.mzn", "mut-NOT-15.mzn", "mut-NOT-16.mzn",
+	"mut-NOT-17.mzn", "mut-NOT-21.mzn", "mut-NOT-22.mzn" };
 unordered_set<string> set_makespan = { "mut-A2DV-5", "mut-A2M-5", "mut-A2S-5",
 	"mut-EQ2GT-1", "mut-EQ2LE-1", "mut-EQ2LT-1", "mut-EQ2NE-1",
 	"mut-F2E-4",
 	"mut-LE2EQ-4", "mut-LE2GE-4", "mut-LE2GT-4", "mut-LE2LT-4", "mut-LE2NE-4",
-	"mut-NOT-06.mzn" };
+	"mut-NOT-08.mzn",
+	"mut-NOT-18.mzn", "mut-NOT-19.mzn" };
 unordered_set<string> set_parameters = { "mut-S2A-1", "mut-S2DV-1", "mut-S2M-1" };
 
 
 int main() {
 
 	// leer la matriz
-	ifstream file_in("../V10_mutants_killed.csv");
+	ifstream file_in("../V11_mutants_killed.csv");
 	if (!file_in.is_open()) {
-		cout << "Fichero V10_mutants_killed_2025.csv no encontrado" << endl;
+		cout << "Fichero V11_mutants_killed_2025.csv no encontrado" << endl;
 		return 1;
 	}
-	ofstream file_out("../classByConstr.csv");
+	ofstream file_out("../V11_classByConstr.csv");
 	if (!file_out.is_open()) {
 		cout << "Fichero classByConstr.csv no se ha podido crear" << endl;
 		return 1;
@@ -119,7 +124,7 @@ int main() {
 	ms.data[2][0] = "non_overlapping";
 	ms.data[3][0] = "cumulative";
 	ms.data[4][0] = "makespan";
-	ms.data[5][0] = "parameters";
+//	ms.data[5][0] = "parameters";
 
 
 
@@ -143,9 +148,9 @@ int main() {
 					ms.data[4][j] = "1";
 				}
 
-				if (set_parameters.count(me.data[i][0])) {
-					ms.data[5][j] = "1";
-				}
+//				if (set_parameters.count(me.data[i][0])) {
+//					ms.data[5][j] = "1";
+//				}
 			}
 		}
 	}
