@@ -20,6 +20,8 @@ __pycache__/
 *_noDups.*
 *_killed*.yaml
 *_sampleDups.*
+!*.csv
+!*.tex
 sample-duplicated/
 
 # Visual Studio indices

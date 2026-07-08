@@ -47,4 +47,4 @@ python 03-within-subsuming.py sample-duplicated/*-stats.csv --output ${VERSION}_
 python 04-opstats-table.py ${VERSION}_operatorStats_noDups.csv --output ${VERSION}_operatorStats_noDups.tex
 
 # Produces table for number of times mutants are in the subsuming set
-python 05-within-subsuming-table.py ${VERSION}_inSubsuming_sampleDups.csv --output ${VERSION}XS_inSubsuming_sampleDups.tex
+python 05-within-subsuming-table.py ${VERSION}_inSubsuming_sampleDups.csv --output ${VERSION}_inSubsuming_sampleDups.tex
