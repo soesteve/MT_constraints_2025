@@ -82,7 +82,7 @@ constraint
                             where rr[r, i] > 0 /\ d[i] > 0 },
             int: sum_rr = sum(i in RTasks)(rr[r, i])
         } in (
-            if not (RTasks != {}) /\ sum_rr > rc[r] then
+            if RTasks != {} /\ sum_rr > rc[r] then
                 cumulative(
                     [ s[i] | i in RTasks ],
                     [ d[i] | i in RTasks ],
@@ -100,7 +100,7 @@ constraint
 constraint
    forall ( i in Tasks where suc[i] == {} )
    (
-      s[i] + d[i] <= objective
+      not (s[i] + d[i] <= objective)
    );
 
 %-----------------------------------------------------------------------------%

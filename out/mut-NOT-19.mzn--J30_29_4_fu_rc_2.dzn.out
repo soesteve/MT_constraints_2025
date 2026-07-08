@@ -1,4 +1,5 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR4/j30/J30_29_4_fu_rc_2.dzn benchmarks/Mutants/mut-NOT-19.mzn
-TIMEOUT
-total time: 30.002981022000313 ms
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M4/j30/J30_29_4_fu_rc_2.dzn benchmarks/Mutants/mut-NOT-19.mzn
+Error: error: Cannot open data file 'benchmarks/data/data_psplib_follow_ups/M4/j30/J30_29_4_fu_rc_2.dzn'.
+OK
+total time: 0.11372915102401748 ms
 OK

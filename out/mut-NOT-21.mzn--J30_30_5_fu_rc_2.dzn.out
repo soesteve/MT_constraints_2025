@@ -1,8 +1,5 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR4/j30/J30_30_5_fu_rc_2.dzn benchmarks/Mutants/mut-NOT-21.mzn
-Start times = [0, 0, 0, 5, 9, 3, 8, 16, 19, 20, 5, 19, 20, 13, 10, 8, 24, 18, 8, 27, 27, 22, 28, 29, 35, 35, 18, 38, 44, 39]
-makespan = 52
-----------
-==========
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M4/j30/J30_30_5_fu_rc_2.dzn benchmarks/Mutants/mut-NOT-21.mzn
+Error: error: Cannot open data file 'benchmarks/data/data_psplib_follow_ups/M4/j30/J30_30_5_fu_rc_2.dzn'.
 OK
-total time: 0.16378566599451005 ms
+total time: 0.11739716399461031 ms
 OK

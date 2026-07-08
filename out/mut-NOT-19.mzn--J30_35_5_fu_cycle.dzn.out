@@ -1,5 +1,5 @@
-/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/MR2/j30/J30_35_5_fu_cycle.dzn benchmarks/Mutants/mut-NOT-19.mzn
-=====UNSATISFIABLE=====
+/opt/minizinc/current/bin/minizinc benchmarks/data/data_psplib_follow_ups/M2/j30/J30_35_5_fu_cycle.dzn benchmarks/Mutants/mut-NOT-19.mzn
+Error: error: Cannot open data file 'benchmarks/data/data_psplib_follow_ups/M2/j30/J30_35_5_fu_cycle.dzn'.
 OK
-total time: 0.16385149996494874 ms
+total time: 0.1187781179905869 ms
 OK
