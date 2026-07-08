@@ -3,6 +3,7 @@
 import argparse
 import re
 from pathlib import Path
+from typing import List
 
 class StringReplacementMutant:
     def __init__(self, operator, original, start, end, replacement):
@@ -105,6 +106,46 @@ class ArgumentSwappingOperator:
                         break
 
 
+class TemplateExpandingOperator:
+    RE_DECLARATION = re.compile( r'(?:array [.*] of|set of )?\w+:')
+
+    def __init__(self, name: str, pattern_pairs: List[tuple[re.Pattern, str]]):
+        self.name = name
+        self.pattern_pairs = pattern_pairs
+
+    def analyze(self, source):
+        for pattern_template in self.pattern_pairs:
+            pattern, template = pattern_template
+            position = 0
+            for line in [l for l in source.splitlines(keepends=True)]:
+                # Avoid comments and declarations of integer
+                if not line.startswith('%') and not self.RE_DECLARATION.findall(line):
+                    for m in pattern.finditer(line):
+                        replacement = m.expand(template)
+                        yield StringReplacementMutant(
+                            operator=self,
+                            original=source,
+                            start=position+m.start(),
+                            end=position+m.end(),
+                            replacement=replacement
+                        )
+                position += len(line)
+
+# Pattern for a variable reference (e.g. "rr[r, i]") or a constant
+TERM_PATTERN = r'(?:\w+(?:\[[^]]+\])?|\{ *\})'
+
+# Pattern for a sequence of terms with arithmetic operators between them
+ARITHMETIC_OPERATOR_PATTERN = r'(?: *[-+*] *| +div +)'
+ARITHMETIC_TERMS_PATTERN = r'{tp}(?:{op}{tp})*'.format(tp=TERM_PATTERN, op=ARITHMETIC_OPERATOR_PATTERN)
+
+# Pattern for a relational expression
+RELATIONAL_OPERATOR_PATTERN = r'(?: *[<>=!]=? *)'
+RELATIONAL_EXPRESSION_PATTERN = r'{aterms}{relop}{aterms}'.format(aterms=ARITHMETIC_TERMS_PATTERN, relop=RELATIONAL_OPERATOR_PATTERN)
+
+# Pattern for a logical expression
+LOGICAL_OPERATOR_PATTERN = r'(?: */\\ *| *\\/ *)'
+LOGICAL_EXPRESSION_PATTERN = r'{relexpr}{logop}{relexpr}'.format(relexpr=RELATIONAL_EXPRESSION_PATTERN, logop=LOGICAL_OPERATOR_PATTERN)
+
 OPERATORS = [
     StringReplacementOperator('E2F', re.compile(r'\bexists\b'), 'forall'),
     StringReplacementOperator('F2E', re.compile(r'\bforall\b'), 'exists'),
@@ -147,6 +188,15 @@ OPERATORS = [
     StringReplacementOperator('S2DV', re.compile(r' \- '), ' div '),
     StringReplacementOperator('DV2S', re.compile(r' div '), '-'),
     ArgumentSwappingOperator('CSWAP', 'cumulative', 2, 3),
+    TemplateExpandingOperator('NOT', [
+        # boolean constants
+        [re.compile('(true|false)'), r'not \1'],
+        # functions or keywords that return booleans
+        [re.compile('((?:exists|cumulative|forall) *[(])'), r'not \1'],
+        # negation of relational and logical expressions
+        [re.compile("(" + RELATIONAL_EXPRESSION_PATTERN +")"), r'not(\1)'],
+        [re.compile("(" + LOGICAL_EXPRESSION_PATTERN + ")"), r'not(\1)'],
+    ])
 ]
 
 
