@@ -201,9 +201,9 @@ OPERATORS = [
 
 
 def generate_mutants(path_to_mzn: Path, output_dir: Path):
-    if output_dir.exists():
-        raise Exception("Output directory '{}' already exists".format(output_dir))
-    output_dir.mkdir()
+    #if output_dir.exists():
+    #    raise Exception("Output directory '{}' already exists".format(output_dir))
+    output_dir.mkdir(exist_ok=True)
     with open(path_to_mzn, 'r', encoding='utf-8') as f_source:
         source = f_source.read()
 
