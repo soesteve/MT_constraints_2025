@@ -5,16 +5,16 @@
 % See the file COPYING for license information.
 %-----------------------------------------------------------------------------%
 % Model example for Resource-Constrained Project Scheduling Problems (RCPSP)
-%
-% A RCPSP consists of resources, tasks, and precedences between some tasks
-% where resources have of a specific capacity and tasks need some capacity of
+% 
+% A RCPSP consists of resources, tasks, and precedences between some tasks 
+% where resources have of a specific capacity and tasks need some capacity of 
 % some resource to be executed.
 % Here, we consider resources with a constant discrete capacity over time and
 % tasks with a constant discrete duration and resource requirements.
 % The objective is to find a optimal schedule with respect to the earliest end
 % time of the schedule where the tasks' resource requirements do not exceed
 % the resource capacities to any time and each precedence is met.
-%
+% 
 %-----------------------------------------------------------------------------%
 
 include "globals.mzn";
@@ -38,7 +38,7 @@ array [Res, Tasks] of int       : rr ;  % The resource requirements
 array [Tasks]      of set of int: suc;  % The task successors
 
     % Planning horizon
-    %
+    % 
 int: t_max = sum(i in Tasks)(d[i]);     % End time of the planning horizon
 set of int: Times = 0..(t_max - 1);     % Possible start times
 
@@ -74,11 +74,11 @@ constraint
     % Cumulative resource constraints
     %
 constraint
-    forall ( r in Res )
+    not forall ( r in Res )
     (
-        let {
-            set of int: RTasks =
-                            { i | i in Tasks
+        let { 
+            set of int: RTasks = 
+                            { i | i in Tasks 
                             where rr[r, i] > 0 /\ d[i] > 0 },
             int: sum_rr = sum(i in RTasks)(rr[r, i])
         } in (
@@ -98,7 +98,7 @@ constraint
     % Makespan constraints
     %
 constraint
-   not forall ( i in Tasks where suc[i] == {} )
+   forall ( i in Tasks where suc[i] == {} )
    (
       s[i] + d[i] <= objective
    );
@@ -119,3 +119,4 @@ output [
 
 %-----------------------------------------------------------------------------%
 %-----------------------------------------------------------------------------%
+

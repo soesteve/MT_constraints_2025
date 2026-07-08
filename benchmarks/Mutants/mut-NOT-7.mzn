@@ -79,11 +79,11 @@ constraint
         let { 
             set of int: RTasks = 
                             { i | i in Tasks 
-                            where rr[r, i] > 0 /\ not(d[i] > 0) },
+                            where rr[r, i] > 0 /\ d[i] > 0 },
             int: sum_rr = sum(i in RTasks)(rr[r, i])
         } in (
             if RTasks != {} /\ sum_rr > rc[r] then
-                cumulative(
+                not cumulative(
                     [ s[i] | i in RTasks ],
                     [ d[i] | i in RTasks ],
                     [ rr[r, i] | i in RTasks ],

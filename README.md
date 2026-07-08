@@ -239,3 +239,4 @@ There is also a convenience script that automates the entire pipeline used for a
 |--+ Mutants ......................... Generated mutants
 + out  ............................... Folder of the result of the execution of models and data
 + out.txt ............................ Summary of the results of folder out
+```
