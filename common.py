@@ -23,7 +23,7 @@ OPERATOR_SETS = [
         ["EQ2NE", "NE2EQ"]
     ],
     [
-        ["C2D", "D2C"]
+        ["C2D", "D2C", "NOT"]
     ],
     [
         ["E2F", "F2E"]
