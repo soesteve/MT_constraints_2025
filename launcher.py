@@ -96,6 +96,6 @@ if __name__ == '__main__':
                      help='path to minizinc executable')
     arg = argp.parse_args()
 
-    OUTDIR.mkdir()
+    OUTDIR.mkdir(exist_ok=True)
     with open('tests.log', 'w') as LOG:
         main(arg.minizinc, arg.model_file, arg.data_file)
